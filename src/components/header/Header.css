@@ -2,11 +2,6 @@
     border: 1px solid grey;
     height: 108px;
 }
-.main{
-    border: 1px solid grey;
-    height: calc(96vh - 96px) ;
-}
-
 .profile{
     height: 60px;
 }
