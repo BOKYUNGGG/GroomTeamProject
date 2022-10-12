@@ -1,12 +1,23 @@
-.header{
-    border: 1px solid grey;
-    height: 108px;
-}
-.main{
-    border: 1px solid grey;
-    height: calc(96vh - 96px) ;
-}
-
-.profile{
-    height: 60px;
+:root {
+    --blue : #2C88D9;
+    --indigo : #6558F5;
+    --indigo-bluh : #c7c3fb;
+    --purple : #730FC3;
+    --pink : #BD34D1;
+    --mint : #1AAE9F;
+    --mint-bluh : #ace2dc;
+    --green : #207868;
+    --brown : #897A5F;
+    --crimson : #AC6363;
+    --red : #D3455B;
+    --red-bluh : #efbcc4;
+    --orange : #E8833A;
+    --yellow : #F7C325;
+    --white : #ffffff;
+    --smoke : #c4d0d9;
+    --gray : #788897;
+    --slate : #4b5d6c;
+    --small : 34px;
+    --medium : 40px;
+    --large : 48px;
 }
