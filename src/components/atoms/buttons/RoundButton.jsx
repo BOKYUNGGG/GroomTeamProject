@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { Children } from 'react'
 import styled from 'styled-components';
+// styled-components
+
 
 const RoundButton = (props) => {
   // props 비구조화 할당
@@ -25,18 +27,19 @@ const RoundButton = (props) => {
       }
   }
 
-
   // styled-components
   const StyledButton = styled.button`
-      border-radius : 4px;
-      box-sizing : border-box;
-      ${setButtonKind(kind)};
-      ${setButtonSize(size)};
-
+    border-radius : 4px;
+    box-sizing : border-box;
+    ${setButtonKind(kind)};
+    ${setButtonSize(size)};
   `
-
+  
+  // render
   return (
-    <StyledButton>{props.value}</StyledButton>
+    <StyledButton onClick={props.onClick}>
+        {props.value}
+    </StyledButton>
   )
 }
 

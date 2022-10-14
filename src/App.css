@@ -21,3 +21,6 @@
     --medium : 40px;
     --large : 48px;
 }
+* {
+    box-sizing: border-box;
+}

@@ -43,13 +43,19 @@ const RoundInput = (props) => {
         border-color: var(--indigo)
       }
   `
+  const onChange = e =>{
+    const key = e.target.id
+    const value = e.target.value
+    props.HandleLiftUp(key, value)
+  }
 
+  // render
   return (
-    // large-input-filled
-    // small-input-outlined
     <StyledInput 
+        id={props.id}
         type={props.type}
         placeholder={props.placeholder}
+        onChange={onChange}
     ></StyledInput>
   )
 }

@@ -7,8 +7,6 @@ const Wrapper = styled.form`
     flex-direction : column;
     justify-content : center;
     align-items : center;
-    width : 100vw;
-    height : 90vh;
 `
 const InputsWrapper = styled.div`
     display : flex;
@@ -17,14 +15,25 @@ const InputsWrapper = styled.div`
 
 
 const LoginForm = () => {
+  const formData = {
+    courseId : "",
+    password : ""
+  }
+  const HandleLiftUp = (key, value) =>{
+    formData[key] = value;
+  }
+  const HandleSubmit = (event) =>{
+    event.preventDefault()
+    console.log(formData)
+    alert("로그인 제출")
+  }
   return (
-    <Wrapper>
-        <h1>Login</h1>
+    <Wrapper onSubmit={HandleSubmit}>
         <InputsWrapper>
-          <RoundInput size="large" kind="normal" type="text" placeholder="courseId"/>
-          <RoundInput size="large" kind="normal" type="password" placeholder="password"/>
+          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="text" id="courseId" placeholder="courseId"/>
+          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="password" id="password" placeholder="password"/>
+          <RoundButton size="large" kind="outlined" value="Submit"/>
         </InputsWrapper>
-        <RoundButton size="large" kind="outlined" value="Submit"/>
     </Wrapper>
   )
 }

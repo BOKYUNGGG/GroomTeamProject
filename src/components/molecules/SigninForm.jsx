@@ -7,8 +7,6 @@ const Wrapper = styled.form`
     flex-direction : column;
     justify-content : center;
     align-items : center;
-    width : 100vw;
-    height : 90vh;
 `
 const InputsWrapper = styled.div`
     display : flex;
@@ -16,17 +14,34 @@ const InputsWrapper = styled.div`
 `
 
 const SigninForm = () => {
+  // Data
+  const formData = {
+    name : "",
+    password : "",
+    email : "",
+    department : ""
+  }
+
+  // Handler
+  const HandleLiftUp = (key, value) =>{
+    formData[key] = value;
+  }
+  const HandleSubmit = (event) =>{
+    event.preventDefault()
+    console.log(formData)
+    alert("회원가입 제출")
+  }
+
+  // Render
   return (
-    <Wrapper>
-        <h1>Sign In</h1>
+    <Wrapper onSubmit={HandleSubmit}>
         <InputsWrapper>
-          <RoundInput size="large" kind="normal" type="text" placeholder="name"/>
-          <RoundInput size="large" kind="normal" type="password" placeholder="password"/>
-          <RoundInput size="large" kind="normal" type="email" placeholder="example@example.com"/>
-          <RoundInput size="large" kind="normal" type="text" placeholder="department"/>
+          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="text" id="name" placeholder="name"/>
+          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="password" id="password" placeholder="password"/>
+          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="email" id="email" placeholder="example@example.com"/>
+          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="text" id="department" placeholder="department"/>
+          <RoundButton size="large" kind="outlined" value="Submit"/>
         </InputsWrapper>
-        <RoundButton size="large" kind="outlined" value="Submit"/>
     </Wrapper>  )
 }
-
 export default SigninForm

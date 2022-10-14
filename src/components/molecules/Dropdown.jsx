@@ -4,6 +4,7 @@ import ToggleButton from '../atoms/buttons/ToggleButton'
 import DropdownMenuItem from '../atoms/Items/DropdownMenuItem'
 import DropdownMenuItemTip from '../atoms/Items/DropdownMenuItemTip'
 
+// props == {size, menu, title}
 const Dropdown = (props) => {
   // props 비구조화 할당
   const {size, menu} = props;
@@ -39,6 +40,7 @@ const Dropdown = (props) => {
     ${setMenuWrapper(size)}
   `
 
+  
   return (
     <Wrapper>
       <ToggleButton size={props.size} kind="outlined" value={props.title}></ToggleButton>

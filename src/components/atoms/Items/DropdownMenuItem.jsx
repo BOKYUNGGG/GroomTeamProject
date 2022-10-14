@@ -14,7 +14,7 @@ const DropdownMenuItem = (props) => {
             case "medium" :
                 return "line-height : 40px; height : 40px; width : 200px; font-size : medium;"
             case "small" :
-                return "line-height : 34px; height : 34px; width : 158px; font-size : small;"
+                return "line-height : 34px; height : 34px; width : 152px; font-size : small;"
         }
     }
 
