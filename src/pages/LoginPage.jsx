@@ -8,7 +8,12 @@ const Wrapper = styled.div`
     align-items : center;
     height : 90vh;
 `
-const LoginPage = () => {
+
+
+const LoginPage = () => { 
+
+
+
   return (
     <Wrapper>
       <h1>Login</h1>

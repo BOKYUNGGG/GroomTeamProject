@@ -9,11 +9,11 @@ const DropdownMenuItemTip = (props) => {
     const setItemSize = (size) =>{
         switch (size) {
             case "large" :
-                return "height : 10px; width : 256px;"
+                return "height : 10px;"
             case "medium" :
-                return "height : 8px; width : 200px;"
+                return "height : 8px;"
             case "small" :
-                return "height : 6px; width : 158px;"
+                return "height : 6px;"
         }
     }
 
@@ -21,6 +21,7 @@ const DropdownMenuItemTip = (props) => {
     const StyledItem = styled.div`
     box-sizing : border-box;
     text-align : center;
+    background-color : white;
     ${setItemSize(size)}
 `
 

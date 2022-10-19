@@ -1,20 +1,21 @@
 import React from 'react'
-import Dropdown from '../components/molecules/Dropdown'
+import TabMenuContainer from '../components/molecules/TabMenuContainer'
+import Header from '../components/organisms/Header'
+import Content from '../components/organisms/Content'
+
+
+import styled from 'styled-components'
+const Wrapper = styled.div`
+
+`
 
 const MainPage = () => {
-  const menu =[
-    {
-      value:"create"
-    },
-    {
-      value:"delete"
-    }
-  ]
   return (
-    <div>
-      <Dropdown title="Student" size="small" menu={menu}></Dropdown>
-
-    </div>
+    <Wrapper>
+      <Header></Header>
+      <TabMenuContainer></TabMenuContainer>
+      <Content></Content>
+    </Wrapper>
   )
 }
 

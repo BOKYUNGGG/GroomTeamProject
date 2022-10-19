@@ -3,10 +3,7 @@ import styled from 'styled-components';
 // styled-components
 
 
-const RoundButton = (props) => {
-  // props 비구조화 할당
-  const {size, kind} = props;
-
+const RoundButton = ({value, size, kind, onClick}) => {
   // styled-component Handlers
   const setButtonKind = (kind)=>{
       switch (kind) {
@@ -37,8 +34,8 @@ const RoundButton = (props) => {
   
   // render
   return (
-    <StyledButton onClick={props.onClick}>
-        {props.value}
+    <StyledButton onClick={onClick}>
+        {value}
     </StyledButton>
   )
 }

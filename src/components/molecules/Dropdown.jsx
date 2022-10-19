@@ -1,40 +1,36 @@
 import React from 'react'
 import styled from 'styled-components'
 import ToggleButton from '../atoms/buttons/ToggleButton'
-import DropdownMenuItem from '../atoms/Items/DropdownMenuItem'
-import DropdownMenuItemTip from '../atoms/Items/DropdownMenuItemTip'
+import DropdownMenuItem from '../atoms/items/DropdownMenuItem'
+import DropdownMenuItemTip from '../atoms/items/DropdownMenuItemTip'
 
-// props == {size, menu, title}
-const Dropdown = (props) => {
-  // props 비구조화 할당
-  const {size, menu} = props;
-
+const Dropdown = ({onAdd, title, size, menus}) => {
   // styled-components Handler
   const setMenuWrapper = (size) =>{
     switch (size) {
         case "large" :
-            return "right : 8px; width : 256px;"
+            return "width : 256px;"
         case "medium" :
-            return "right : 7px; width : 200px;"
+            return "width : 200px;"
         case "small" :
-            return "right : 6px; width : 156px;"
+            return "width : 156px;"
     }
 }
 
-
   // styled-components
   const Wrapper = styled.div`
-    display : flex; 
-    flex-direction : column;
-    justify-content : center;
-    align-items : center;
+    position : relative;
+    display : inline-block;
+    &:hover div{
+      display : block;
+    }
   `
   const MenuWrapper = styled.div`
-    display : flex;
+    display : none;
+    position : absolute;
     flex-direction : column;
     justify-content : center;
     align-items : center;
-    position : relative;
     border-radius : 4px 4px 4px 4px;
     border : solid 2px var(--smoke);
     ${setMenuWrapper(size)}
@@ -43,17 +39,17 @@ const Dropdown = (props) => {
   
   return (
     <Wrapper>
-      <ToggleButton size={props.size} kind="outlined" value={props.title}></ToggleButton>
+      <ToggleButton size={size} kind="outlined" value={title}></ToggleButton>
       <MenuWrapper>
-        <DropdownMenuItemTip size={props.size}></DropdownMenuItemTip>
+        <DropdownMenuItemTip size={size}></DropdownMenuItemTip>
         {
-          menu.map((data)=>{
+          menus.map((menu)=>{
             return (
-              <DropdownMenuItem size={size} value={data.value}></DropdownMenuItem>
+              <DropdownMenuItem onAdd={onAdd} size={size} value={menu}></DropdownMenuItem>
             )
           })
         }
-        <DropdownMenuItemTip size={props.size}></DropdownMenuItemTip>
+        <DropdownMenuItemTip size={size}></DropdownMenuItemTip>
       </MenuWrapper>
     </Wrapper>
   )

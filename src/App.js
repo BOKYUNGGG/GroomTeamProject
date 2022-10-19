@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import SigninPage from './pages/SigninPage';
 
 import TestPage from './pages/TestPage';
+import TestPageTwo from './pages/TestPageTwo';
 
 function App() {
 
@@ -19,6 +20,8 @@ function App() {
           <Route path='/signin' element={<SigninPage />}></Route>
           <Route path='/main' element={<MainPage />}></Route>
           <Route path='/test' element={<TestPage />}></Route>
+          <Route path='/test2' element={<TestPageTwo />}></Route>
+
         </Routes>
       </Suspense>
 

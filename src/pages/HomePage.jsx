@@ -1,4 +1,4 @@
-import React, {useState, useReducer, useEffect} from 'react'
+import React, {useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import RoundButton from '../components/atoms/buttons/RoundButton'
@@ -32,6 +32,7 @@ const HomePage = () => {
             console.log("회원가입 클릭")
             navigate('/signin')
         }
+
     },[login, signin])
     return (
         <Wrapper>

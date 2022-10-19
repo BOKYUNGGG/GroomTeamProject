@@ -1,39 +1,47 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import {useDispatch, useSelector } from 'react-redux'
+import { addProfileInfo } from '../../modules/profile'
+import { useNavigate } from 'react-router-dom'
 import RoundInput from '../atoms/inputs/RoundInput'
 import RoundButton from '../atoms/buttons/RoundButton'
-const Wrapper = styled.form`
+const Wrapper = styled.div`
     display : flex;
     flex-direction : column;
     justify-content : center;
     align-items : center;
 `
-const InputsWrapper = styled.div`
-    display : flex;
-    flex-direction : column;
-`
 
 
 const LoginForm = () => {
-  const formData = {
-    courseId : "",
-    password : ""
+  const dispatch = useDispatch()
+  const dispatchedAddProfileInfo = data => dispatch(addProfileInfo(data))
+  const navigate = useNavigate()
+
+  const profile = {
+    studentId : null,
+    password : null
   }
   const HandleLiftUp = (key, value) =>{
-    formData[key] = value;
+    profile[key] = value;
   }
-  const HandleSubmit = (event) =>{
-    event.preventDefault()
-    console.log(formData)
-    alert("로그인 제출")
+
+  const fetchUser = async () =>{
+    try{
+      const response = await axios.get(`/student/${profile.studentId}`)
+      dispatchedAddProfileInfo(response.data)
+      navigate('/main')
+    }catch(e){
+      console.log(e)
+    }
   }
+
   return (
-    <Wrapper onSubmit={HandleSubmit}>
-        <InputsWrapper>
-          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="text" id="courseId" placeholder="courseId"/>
-          <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="password" id="password" placeholder="password"/>
-          <RoundButton size="large" kind="outlined" value="Submit"/>
-        </InputsWrapper>
+    <Wrapper>
+        <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="text" id="studentId" placeholder="studentId"/>
+        <RoundInput HandleLiftUp={HandleLiftUp} size="large" kind="normal" type="password" id="password" placeholder="password"/>
+        <RoundButton onClick={fetchUser} size="large" kind="outlined" value="Submit"/>
     </Wrapper>
   )
 }
