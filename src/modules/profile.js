@@ -1,36 +1,24 @@
-const ADD     = 'profile/ADD'
-const SIGNIN    = 'profile/SIGNIN'
-const LOGOUT    = 'profile/LOGOUT'
+const UPDATE = 'profile/UPDATE'
+const DELETE = 'profile/DLETE'
 
-export const addProfileInfo  = (data) => ({type : ADD , data})
-export const signin = (data) => ({type : SIGNIN, data})
-export const logout = (    ) => ({type : LOGOUT      })
+export const updateProfileInfo = (data) => ({type : UPDATE, data})
+export const deleteProfileInfo = (    ) => ({type : DELETE      })
 
-
-const initialState = {
-    logined : false,
-}
+const initialState = null
+// {
+//   studentId :20142058,
+//   name : '김예준',
+//   email : 'rladpwns12@gmail.com',
+//   password : 'qwer1234',
+//   department : 'ACCOUNTING',
+// } 
 
 export default function profileReducer(state = initialState, action) {
     switch (action.type) {
-        case ADD:
-          return {
-            ...state,
-            logined : true,
-            profileInfo : action.data
-          };
-        case SIGNIN:
-          return {
-            ...state,
-            logined : true,
-            profileInfo : action.data          
-        };
-        case LOGOUT:
-          return {
-            ...state,
-            logined : false,
-            profileInfo : null   
-          };
+        case UPDATE:
+          return action.data
+        case DELETE:
+          return null
         default:
           return state;
       }

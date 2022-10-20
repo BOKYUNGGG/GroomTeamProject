@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:7003",
   "name": "enrolment-app",
   "version": "0.1.0",
   "private": true,

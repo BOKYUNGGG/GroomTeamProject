@@ -10,14 +10,6 @@ const Wrapper = styled.div`
     align-items : center;
     height : 90vh;
 `
-function reducer(state, action){
-    switch(action.type){
-        case 'login':
-            return {head : "Login", path : "/login"}
-        case 'signin':
-            return {head : "Sign In", path : "/signin"}
-    }
-}
 
 const HomePage = () => {
     const [login, setLogin] = useState(false)

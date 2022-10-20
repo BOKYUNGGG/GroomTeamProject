@@ -21,8 +21,6 @@ const SearchCourseTab = () => {
         <button>검색</button>
       </form>
       <SearchCourseTable data={courseData} columns={courseColumns}></SearchCourseTable>
-
-
     </div>
   )
 }

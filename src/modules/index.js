@@ -4,8 +4,10 @@ import profileReducer from "./profile";
 import createdCoursesReducer from "./createdCourses"
 import reservedCoursesReducer from "./reservedCourses"
 import searchedCoursesReducer from "./searchedCourses"
+import tabReducer from "./tab";
 const rootReducer = combineReducers({
-    tabMenuReducer, 
+    tabMenuReducer,
+    tabReducer, 
     profileReducer, 
     createdCoursesReducer, 
     reservedCoursesReducer,

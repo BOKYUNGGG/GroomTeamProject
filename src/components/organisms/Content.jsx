@@ -1,43 +1,23 @@
 import React, {useState, useEffect} from 'react'
-import { useSelector } from 'react-redux'
-
 import SearchCourseTab from '../molecules/tabs/SearchCourseTab'
 import StudentCourseTab from '../molecules/tabs/StudentCourseTab'
 import PutEnrollmentTab from '../molecules/tabs/PutEnrollmentTab'
-import ProfessorCourseTab from '../molecules/ProfessorCourseTab'
+import ProfessorCourseTab from '../molecules/tabs/ProfessorCourseTab'
 import CreateEnrollmentTab from '../molecules/tabs/CreateEnrollmentTab'
 
-const Content = () => {
-    // redux
-    const tabInfo = useSelector((state)=>state.tabMenuReducer)
-    const {reservedCourses, createdCourses, searchedCourses} =
-    useSelector(state => ({
-        reservedCourses : state.reservedCoursesReducer,
-        createdCourses : state.createdCoursesReducer,
-        searchedCourses : state.searchedCoursesReducer
-    }))
-
-
-    const [selected, setSelected] = useState(null)
-    var id = null
-    var selectedTab = null
-
-    useEffect(()=>{
-        id = tabInfo.selectedId
-        selectedTab = tabInfo.menuItems.find(element=>element.id==id)
-        setSelected(selectedTab.value)
-    })
+const Content = ({tabsInfo}) => {
+    const selectedTab = tabsInfo.find(element=>element.selected==true)
    
 
-    
+    console.log(tabsInfo)
 
     return (
         <div>
-            {selected=="Search Course" ? <SearchCourseTab/> : null}
-            {selected=="Student's Course" ? <StudentCourseTab/> : null}
-            {selected=="Put Enrollment" ? <PutEnrollmentTab/> : null}
-            {selected=="Professor's Course" ? <ProfessorCourseTab/> : null}
-            {selected=="Create Enrollment" ? <CreateEnrollmentTab/> : null}
+            {selectedTab.menu=="Search Course" ? <SearchCourseTab/> : null}
+            {selectedTab.menu=="Student's Course" ? <StudentCourseTab/> : null}
+            {selectedTab.menu=="Put Enrollment" ? <PutEnrollmentTab/> : null}
+            {selectedTab.menu=="Professor's Course" ? <ProfessorCourseTab/> : null}
+            {selectedTab.menu=="Create Enrollment" ? <CreateEnrollmentTab/> : null}
         </div>
     )
 }

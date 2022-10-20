@@ -1,7 +1,9 @@
 import React from 'react'
-import TabMenuContainer from '../components/molecules/TabMenuContainer'
 import Header from '../components/organisms/Header'
+import TabMenuContainer from '../components/molecules/tabs/TabMenuContainer'
 import Content from '../components/organisms/Content'
+import { useSelector, useDispatch } from 'react-redux'
+import {addTab, toggleTab, deleteTab} from '../modules/tab'
 
 
 import styled from 'styled-components'
@@ -10,11 +12,24 @@ const Wrapper = styled.div`
 `
 
 const MainPage = () => {
+
+    // redux
+    const dispatch = useDispatch()
+    const dispatchedAddTab = (data) => dispatch(addTab(data))
+    const dispatchedToggleTab = (data) => dispatch(toggleTab(data))
+    const dispatchedDeleteTab = (data) => dispatch(deleteTab(data))
+    const tabInfo = useSelector(state=>state.tabReducer)
+
+    
   return (
     <Wrapper>
-      <Header></Header>
-      <TabMenuContainer></TabMenuContainer>
-      <Content></Content>
+      <Header dispatchedAddTab={dispatchedAddTab}></Header>
+      <TabMenuContainer 
+        tabInfo={tabInfo}
+        dispatchedDeleteTab={dispatchedDeleteTab}
+        dispatchedToggleTab={dispatchedToggleTab}
+      />
+      <Content tabsInfo={tabInfo}></Content>
     </Wrapper>
   )
 }

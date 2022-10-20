@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import SigninForm from '../components/molecules/SigninForm'
+import SigninForm from '../components/molecules/forms/SigninForm'
 const Wrapper = styled.div`
     display : flex;
     flex-direction : column;

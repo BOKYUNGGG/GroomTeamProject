@@ -40,7 +40,7 @@ const RoundInput = (props) => {
       }
       &:focus{
         outline : none !important;
-        border-color: var(--indigo)
+        border-color: var(--indigo);
       }
   `
   const onChange = e =>{
