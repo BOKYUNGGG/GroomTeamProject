@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import axios from 'axios'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import {updateProfileInfo} from '../../../modules/profile'
 import {useDispatch} from 'react-redux'
+import axios from 'axios'
+import styled from 'styled-components'
 const StyledForm = styled.form`
     display : flex;
     gap : 2px;
@@ -45,16 +46,19 @@ const LoginForm = () => {
   const dispatch = useDispatch()
   const dispatchedUpdateProfileInfo = data => dispatch(updateProfileInfo(data))
 
+  // navigator
+  const navigate = useNavigate()
+
+
   // onSubmit handler
   const handleOnSubmit = (e) =>{
-
     // onSubmit 시에 React App 이 재실행되는 것을 막아줌 
     e.preventDefault() 
 
     // REST API Request
-    axios.get(`http://ahci.ddns.net:8080/student/${e.target.studentId.value}`)
-    .then((res)=>{console.log(res)})
+    axios.get(`/student/${e.target.studentId.value}`)
     .then((res)=>{dispatchedUpdateProfileInfo(res.data)})
+    .then(()=>navigate('/main'))
     .catch((e)=>{console.log(e)})
   }
   return (

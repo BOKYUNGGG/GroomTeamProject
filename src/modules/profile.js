@@ -16,6 +16,7 @@ const initialState = null
 export default function profileReducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE:
+          console.log('프로필 정보를 업데이트 합니다.',action.data)
           return action.data
         case DELETE:
           return null

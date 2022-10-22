@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
 import { departmentList } from '../../../assets/courseData'
 import {updateProfileInfo} from '../../../modules/profile'
 import {useDispatch} from 'react-redux'
@@ -74,25 +75,39 @@ const SigninForm = () => {
   const dispatch = useDispatch()
   const dispatchedUpdateProfileInfo = data => dispatch(updateProfileInfo(data))
 
+  // navigator
+  const navigate = useNavigate()
+
   // onSubmit handler
   const handleOnSubmit = (e) =>{
     // onSubmit 시에 React App 이 재실행되는 것을 막아줌 
     e.preventDefault() 
 
-    // REST API
-    axios.post('http://ahci.ddns.net:8080/student', {
-      name : e.target.name.value,
+    var data = JSON.stringify({
+      studentId : parseInt(e.target.studentId.value),
       email : e.target.email.value,
       password : e.target.password.value,
-      department : e.target.department.value
+      department : e.target.department.value,
+      name : e.target.name.value,
     })
-    .then((res)=>console.log(res))
-    .then((res)=>{dispatchedUpdateProfileInfo(res.data)})
-    .catch((e)=>{console.log(e)})
+    var config = {
+      method: 'post',
+      url: '/student',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    }
+    axios(config)
+    .then((res)=>{dispatchedUpdateProfileInfo(res.data)})    
+    .then(()=>{navigate('/main')})
+    .catch((error)=>{console.log(error)});
   }
+  // 
 
   return (
     <StyledForm onSubmit={handleOnSubmit}>
+        <input name="studentId" type="text" placeholder="studentId"/>
         <input name="name" type="text" placeholder="name"/>
         <input name="email" type="email" placeholder="example@example.com"/>
         <input name="password" type="password" placeholder="password"/>

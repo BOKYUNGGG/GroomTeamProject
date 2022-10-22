@@ -100,7 +100,7 @@ const Header = ({dispatchedAddTab}) => {
         <Dropdown>Professor
           <div>
             <button onClick={onClick} value="Professor's Course">Professor's Course</button>
-            <button onClick={onClick} value="Create Enrollment">Create Enrollment</button>
+            <button onClick={onClick} value="Create Course">Create Course</button>
           </div>
         </Dropdown>
       </CenterWrapper>

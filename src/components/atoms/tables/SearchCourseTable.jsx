@@ -53,7 +53,7 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 )
 
-function SearchCourseTable({ columns, data }) {
+function SearchCourseTable({addReserved, columns, data }) {
 
   // useTable 객체
   const {
@@ -174,8 +174,8 @@ function SearchCourseTable({ columns, data }) {
           ))}
         </select>
         <TableSearchForm onSubmit={setGlobalFilter}></TableSearchForm>
-        <button onClick={()=>{console.log(selectedFlatRows)}}>selectedFlatRows 출력</button>
-        <button>관심과목 담기</button>
+        <button >selectedFlatRows 출력</button>
+        <button onClick={()=>{selectedFlatRows.map((element)=>addReserved(element.original))}}>관심과목 담기</button>
       </div>
     </Styles>
   )

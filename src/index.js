@@ -11,7 +11,6 @@ import rootReducer from './modules/index'
 export const store = configureStore({
   reducer : rootReducer
 })
-console.log(store.getState())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

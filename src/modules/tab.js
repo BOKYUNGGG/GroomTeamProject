@@ -27,7 +27,7 @@ const returnColor = (menu) => {
             return "mint"
         case "Professor's Course":
             return "purple"
-        case "Create Enrollment":
+        case "Create Course":
             return "blue"
     }
 }

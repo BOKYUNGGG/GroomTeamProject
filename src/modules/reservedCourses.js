@@ -30,8 +30,10 @@ export default function reservedCoursesReducer(state=initialState, action){
 
 
         case ADD :
-            return state.concat(action.data)
+            console.log(state)
+            const newState = state.concat(action.data)
 
+            return newState.filter((item, pos) => newState.indexOf(item) === pos)
 
         case DELETE :
             return state.filter(element => element.courseId !== action.data.courseId)

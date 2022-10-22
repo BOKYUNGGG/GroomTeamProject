@@ -1,13 +1,11 @@
-import React, {Suspense, useState, useEffect} from 'react'
+import React, {Suspense} from 'react'
 import {Route, Routes} from 'react-router-dom'
 import HomePage from './pages/HomePage';
 import MainPage from './pages/MainPage';
-import './App.css'
 import LoginPage from './pages/LoginPage';
 import SigninPage from './pages/SigninPage';
+import './App.css'
 
-import TestPage from './pages/TestPage';
-import TestPageTwo from './pages/TestPageTwo';
 
 function App() {
 
@@ -19,9 +17,6 @@ function App() {
           <Route path='/login' element={<LoginPage />}></Route>
           <Route path='/signin' element={<SigninPage />}></Route>
           <Route path='/main' element={<MainPage />}></Route>
-          <Route path='/test' element={<TestPage />}></Route>
-          <Route path='/test2' element={<TestPageTwo />}></Route>
-
         </Routes>
       </Suspense>
 

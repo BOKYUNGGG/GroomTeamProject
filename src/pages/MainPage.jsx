@@ -19,7 +19,6 @@ const MainPage = () => {
     const dispatchedToggleTab = (data) => dispatch(toggleTab(data))
     const dispatchedDeleteTab = (data) => dispatch(deleteTab(data))
     const tabInfo = useSelector(state=>state.tabReducer)
-
     
   return (
     <Wrapper>

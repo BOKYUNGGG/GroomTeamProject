@@ -1,0 +1,1 @@
+export const BASE_URL = "http://ahci.ddns.net:8080"

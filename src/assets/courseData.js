@@ -1,19 +1,4 @@
-// 사용법 : import {courseData} from ''
 
-export const courseData= [
-  // {
-  //   courseId : "1",
-  //   department : "asdasd",
-  //   title : "Programming 1",
-  //   professorName : "Kim",
-  //   credit : "3",
-  //   numberOfStudents : "15",
-  //   spare : "5",
-  //   capacity : "20",
-  //   year : "2022",
-  //   semester : "",
-  // }
-]
 export const courseColumns = [
   {
     Header: '학수번호',
@@ -56,6 +41,7 @@ export const courseColumns = [
     accessor: 'semester'
   }
 ]
+
 export const departmentList = [ 
   'ACCOUNTING' , 
   'CHEMICAL_ENGINEERING' , 
@@ -94,23 +80,3 @@ export const departmentList = [
   'THE_GLOBAL_SCHOOL_OF_MEDIA' , 
   'THINKING_AND_EXPRESSION'
 ]
-
-function makeData(){
-  for(var i =0; i<1000; i++){
-    courseData.push(
-      {
-        courseId : i,
-        department : "ACCOUNTING",
-        title : `Programming ${i}`,
-        professorName : "Kim",
-        credit : "3",
-        numberOfStudents : "15",
-        spare : "5",
-        capacity : "20",
-        year : "2022",
-        semester : "SPRING",
-      }
-    )
-  }
-}
-makeData()

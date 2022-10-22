@@ -38,12 +38,13 @@ const TabMenuContainer = ({tabInfo, dispatchedDeleteTab, dispatchedToggleTab}) =
   return (
     <Wrapper>
       {
-        tabInfo.map(element => 
-        <MenuItemWrapper style={{backgroundColor:"var(--"+element.color+")"}}>
-            <StyledMenuItem>
-              <div id={element.menu} onClick={onToggle}>{element.menu}</div>
+        tabInfo.map((element, index) => 
+        <MenuItemWrapper key={index+10000} style={{backgroundColor:"var(--"+element.color+")"}}>
+            <StyledMenuItem key={index+20000}>
+              <div key={index+30000} id={element.menu} onClick={onToggle}>{element.menu}</div>
             </StyledMenuItem>
           <StyledSvg 
+            key={index+40000}
             onClick={onDelete}
             id={element.menu}
             xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 16 16">
