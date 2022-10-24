@@ -1,9 +1,6 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-
-
-
 import {courseColumns} from '../../../assets/courseData'
 import { addProfessorCourses, deleteProfessorCourses } from '../../../modules/professorCourses'
 import ProfessorCourseTable from '../../atoms/tables/ProfessorCourseTable'
@@ -32,7 +29,7 @@ const ProfessorCourseTab = () => {
   }, [])
 
   return (
-    <div>ProfessorCourseTab
+    <div>
       <ProfessorCourseTable data={professorCoursesInfo} columns={courseColumns}></ProfessorCourseTable>
     </div>
   )

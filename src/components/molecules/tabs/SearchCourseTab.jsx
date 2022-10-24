@@ -44,16 +44,17 @@ const SearchCourseTab = () => {
     e.preventDefault() 
     // REST API 
     deleteAllSearchedCoursesInfo()
-    
-    axios.get('/api/course/courses',{
-      params : {
+    const data = {
         keyword : e.target.keyword.value,
         page : 0,
         semester : e.target.semester.value,
         size : 1000,
         type : e.target.type.value,
         year : e.target.year.value
-      }
+    }
+    console.log('Search Course Option : ', data)
+    axios.get('/api/course/courses',{
+      params : data
     }
     )
     .then((res)=>{addSearchedCoursesInfo(res.data)})

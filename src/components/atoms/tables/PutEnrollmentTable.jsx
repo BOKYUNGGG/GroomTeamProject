@@ -37,11 +37,9 @@ const Styles = styled.div`
 `
 const PutEnrollmentTable = ({ data, columns}) => {
   const {studentId} = useSelector(state=>state.profileReducer)
-  console.log(studentId)
-
+  // 수강신청 버튼 기능
   const onPutEnrollment = (e, row)=>{
     e.preventDefault();
-    
     var data = JSON.stringify({
       studentId : studentId,
       courseId : parseInt(row.original.courseId),
@@ -61,11 +59,9 @@ const PutEnrollmentTable = ({ data, columns}) => {
       console.log(error)
       e.target.submit.style = "color : white; background-color : var(--red);"}
       );
-
-    
   }
 
-  // Use the state and functions returned from useTable to build your UI
+  // react-table
   const {
     getTableProps,
     getTableBodyProps,
@@ -85,13 +81,7 @@ const PutEnrollmentTable = ({ data, columns}) => {
         // Let's make a column for selection
         {
           id: 'selection',
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <div>신청 버튼</div>
-          ),
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
+          Header: (<div>신청 버튼</div>),
           Cell: ({ row }) => (
             <form onSubmit={(e)=>{onPutEnrollment(e,row)}}>
               <input name="submit" type="submit" value="submit"></input>
@@ -117,7 +107,7 @@ const PutEnrollmentTable = ({ data, columns}) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.slice(0, 10).map((row, i) => {
+          {rows.map((row) => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>

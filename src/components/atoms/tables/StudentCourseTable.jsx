@@ -106,7 +106,7 @@ const StudentCourseTable = ({ data, columns}) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.slice(0, 10).map((row, i) => {
+          {rows.map((row) => {
             prepareRow(row)
             return (
               <tr {...row.getRowProps()}>
