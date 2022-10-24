@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import qs from 'qs'
+import axios from 'axios'
 import LoginForm from '../components/molecules/forms/LoginForm'
 const Wrapper = styled.div`
     display : flex;
@@ -10,14 +10,6 @@ const Wrapper = styled.div`
     height : 90vh;
 `
 const LoginPage = () => { 
-  const data = "김예준"
-  console.log(data)
-  console.log(encodeURIComponent(data))
-
-  const object = {keyword : encodeURIComponent(data)}
-  console.log(object)
-  console.log(JSON.stringify(object))
-
   return (
     <Wrapper>
       <h1>Login</h1>

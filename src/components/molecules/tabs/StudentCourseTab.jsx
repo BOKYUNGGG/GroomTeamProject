@@ -38,7 +38,7 @@ const StudentCourseTab = () => {
 
   const onSubmit = (e) =>{
     e.preventDefault()
-
+    dispatchedDelete()
     const data = qs.stringify({
       semester : e.target.semester.value,
       studentId : profileInfo.studentId,
@@ -48,7 +48,10 @@ const StudentCourseTab = () => {
     
     axios.get(`/api/enrolment?${data}`)
     .then((res)=>{dispatchedAdd(res.data.courses)})
-    .catch((e)=>alert(e))
+    .catch((e)=>{
+      console.log(e)
+      alert(e)
+    })
   }
 
   useEffect(()=>{

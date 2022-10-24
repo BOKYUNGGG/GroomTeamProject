@@ -73,20 +73,18 @@ const PutEnrollmentTable = ({ data, columns}) => {
 
     var data = {
       studentId : studentId,
-      courseId : parseInt(row.original.courseId),
+      courseId : row.original.courseId,
     }
     
-    console.log(data)
     var config = {
       method: 'put',
       url: '/api/enrolment',
       headers: { 
         'Content-Type': 'application/json'
       },
-      params : data
+      data : data
     }
     axios(config)
-    .then((res)=>console.log(res.data))
     .then(()=>{e.target.submit.style = "color : white; background-color : var(--mint);"}) 
     .catch((error)=>{
       console.log(error)
