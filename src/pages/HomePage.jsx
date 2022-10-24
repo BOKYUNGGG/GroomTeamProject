@@ -1,14 +1,25 @@
 import React, {useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import RoundButton from '../components/atoms/buttons/RoundButton'
-
 const Wrapper = styled.div`
     display : flex;
     flex-direction : column;
+    gap : 4px;
     justify-content : center;
     align-items : center;
     height : 90vh;
+    & button{
+        background-color : white;
+        border-radius : 4px;
+        border : solid 2px var(--smoke);
+        color : var(--indigo);
+        font-size : large;
+        width : 256px;
+        height : 48px;
+    }
+    & button:hover{
+        border-color : var(--indigo);
+    }
 `
 
 const HomePage = () => {
@@ -29,8 +40,8 @@ const HomePage = () => {
     return (
         <Wrapper>
             <h1>Hello, World</h1>
-            <RoundButton onClick={()=>{setLogin(!login)}} value="Login" kind="outlined" size="large"></RoundButton>
-            <RoundButton onClick={()=>{setSignin(!signin)}} value="Sign In" kind="outlined" size="large"></RoundButton>
+            <button onClick={()=>{setLogin(!login)}}>Login</button>
+            <button onClick={()=>{setSignin(!signin)}}>Sign In</button>
         </Wrapper>
     )
 }

@@ -8,7 +8,9 @@ import {addTab, toggleTab, deleteTab} from '../modules/tab'
 
 import styled from 'styled-components'
 const Wrapper = styled.div`
-
+  display : grid;
+  grid-template-rows: 100px 40px auto;
+  overflow : auto;
 `
 
 const MainPage = () => {

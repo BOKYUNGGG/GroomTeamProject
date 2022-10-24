@@ -2,30 +2,34 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTable } from "react-table"
 const Styles = styled.div`
-  padding: 1rem;
-  table {
-    border-spacing: 0;
-    border: 1px solid black;
-
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
-
-    th,
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-
-      :last-child {
-        border-right: 0;
-      }
-    }
+  display : flex;
+  flex-direction : column;
+  align-items : center;
+  & table {
+    
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+  }
+  & table td{
+    border : solid 1px #ddd;
+    padding : 8px;
+  }
+  & table th{
+    border : solid 1px #ddd;
+    padding : 8px;
+  }
+  & table tr:nth-child(even){
+    background-color: #f2f2f2;
+  }
+  & table tr:hover {
+    background-color: #ddd;
+  }
+  & table th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--indigo);
+    color: white;
   }
 `
 const ProfessorCourseTable = ({ data, columns}) => {

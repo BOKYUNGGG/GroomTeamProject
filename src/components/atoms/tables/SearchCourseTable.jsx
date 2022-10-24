@@ -4,38 +4,56 @@ import { useGlobalFilter, useSortBy, useTable, usePagination, useRowSelect } fro
 import TableSearchForm from '../../molecules/forms/TableSearchForm'
 import styled from 'styled-components'
 const Styles = styled.div`
-  padding: 1rem;
-
-  table {
-    border-spacing: 0;
-    border: 1px solid black;
-
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
-
-    th,
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-
-      :last-child {
-        border-right: 0;
-      }
-    }
+  width : 1600px;
+  display : flex;
+  flex-direction : column;
+  align-items : stretch;
+  & table {
+    
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
   }
-
-  .pagination {
-    padding: 0.5rem;
+  & table td{
+    border : solid 1px #ddd;
+    padding : 8px;
+  }
+  & table th{
+    border : solid 1px #ddd;
+    padding : 8px;
+  }
+  & table tr:nth-child(even){
+    background-color: #f2f2f2;
+  }
+  & table tr:hover {
+    background-color: #ddd;
+  }
+  & table th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--indigo);
+    color: white;
   }
 `
-
+const TableTopWrapper = styled.div`
+  display : flex;
+  width : 100%;
+  height : 40px;
+  & select{
+    font-size : medium;
+  }
+  & div{
+    flex-grow : 1;
+  }
+`
+const PagenationWrapper = styled.div`
+  display : flex;
+  align-items : center;
+  font-size : medium;
+  & svg:hover {
+    fill : var(--indigo);
+  }
+`
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = React.useRef()
@@ -65,14 +83,12 @@ function SearchCourseTable({addReserved, columns, data }) {
     canPreviousPage,
     canNextPage,
     pageOptions,
-    pageCount,
-    gotoPage,
     nextPage,
     previousPage,
     setPageSize,
     selectedFlatRows,
     setGlobalFilter,
-    state: { pageIndex, pageSize, selectedRowIds },
+    state: { pageIndex, pageSize },
   } = useTable({columns,data,},useGlobalFilter,useSortBy,usePagination,useRowSelect,
     hooks => {
       hooks.visibleColumns.push(columns => [
@@ -103,6 +119,20 @@ function SearchCourseTable({addReserved, columns, data }) {
   // Render
   return (
     <Styles>
+      <TableTopWrapper>
+        <select
+          value={pageSize}
+          onChange={e => {setPageSize(Number(e.target.value))}}
+          >
+            {[10, 20, 30, 40, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+        </select>
+        <div></div>
+        <TableSearchForm onSubmit={setGlobalFilter}></TableSearchForm>
+      </TableTopWrapper>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -130,53 +160,20 @@ function SearchCourseTable({addReserved, columns, data }) {
         Pagination can be built however you'd like. 
         This is just a very basic UI implementation:
       */}
-      <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              gotoPage(page)
-            }}
-            style={{ width: '100px' }}
-          />
-        </span>{' '}
-        <select
-          value={pageSize}
-          onChange={e => {
-            setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-        <TableSearchForm onSubmit={setGlobalFilter}></TableSearchForm>
-        <button >selectedFlatRows 출력</button>
-        <button onClick={()=>{selectedFlatRows.map((element)=>addReserved(element.original))}}>관심과목 담기</button>
-      </div>
+      <PagenationWrapper>
+        <svg 
+          onClick={() => previousPage()} disabled={!canPreviousPage}
+          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--indigo-bluh)" viewBox="0 0 16 16">
+          <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+        </svg>
+        <span>Page{' '}{pageIndex + 1} of {pageOptions.length}</span>
+        <svg 
+          onClick={() => nextPage()} disabled={!canNextPage}
+          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--indigo-bluh)" viewBox="0 0 16 16">
+          <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+        </svg>
+      </PagenationWrapper>
+      <button onClick={()=>{selectedFlatRows.map((element)=>addReserved(element.original))}}>관심과목 담기</button>
     </Styles>
   )
 }

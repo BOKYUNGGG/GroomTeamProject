@@ -1,9 +1,15 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
+import styled from 'styled-components'
 import {courseColumns} from '../../../assets/courseData'
 import StudentCourseTable from '../../atoms/tables/StudentCourseTable'
 import { addStudentCourses, deleteStudentCourses } from '../../../modules/studentCourses'
+const Wrapper = styled.div`
+  display : flex;
+  flex-direction : column;
+  align-items : center;
+`
 const StudentCourseTab = () => {
   // redux
   const profileInfo = useSelector(state=>state.profileReducer)
@@ -17,28 +23,24 @@ const StudentCourseTab = () => {
     dispatchedDelete()
     
 
-    axios.get("http://ahci.ddns.net:8080/enrolment", {
+    axios.get("api/enrolment", {
       params : {
         semester : "FALL",
         studentId : profileInfo.studentId,
         year : 2022
       }
     })
-    .then((res)=>{dispatchedAdd(res.data.courses)})
+    .then((res)=>{
+      dispatchedAdd(res.data.courses)
+      console.log(res.data)
+    })
     .catch((e)=>console.log(e))
   }, [])
   
   return (
-    <div>
-      <div>신청한 과목</div>
-      <button onClick={()=>{console.log(profileInfo)}}>profileInfo</button>
-
-      <button onClick={()=>{console.log(studentCourseInfo)}}>studentCourseInfo</button>
+    <Wrapper>
       <StudentCourseTable data={studentCourseInfo} columns={courseColumns}></StudentCourseTable>
-      <button>신청 취소</button>
-
-
-    </div>
+    </Wrapper>
   )
 }
 

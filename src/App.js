@@ -10,18 +10,17 @@ import './App.css'
 function App() {
 
   return (
-    <div>
-      <Suspense fallback={()=>{return <h1>홈페이지 로딩중</h1>}}>
-        <Routes>
-          <Route exact path='/' element={<HomePage />}></Route>
-          <Route path='/login' element={<LoginPage />}></Route>
-          <Route path='/signin' element={<SigninPage />}></Route>
-          <Route path='/main' element={<MainPage />}></Route>
-        </Routes>
-      </Suspense>
-
-
-
+    <div className='App'>
+      <div className='AppGlass'>
+        <Suspense fallback={()=>{return <h1>홈페이지 로딩중</h1>}}>
+          <Routes>
+            <Route exact path='/' element={<HomePage />}></Route>
+            <Route path='/login' element={<LoginPage />}></Route>
+            <Route path='/signin' element={<SigninPage />}></Route>
+            <Route path='/main' element={<MainPage />}></Route>
+          </Routes>
+        </Suspense>
+      </div>
     </div>
   );
 }

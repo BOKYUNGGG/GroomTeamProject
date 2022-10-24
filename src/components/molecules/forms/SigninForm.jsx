@@ -39,22 +39,6 @@ const StyledForm = styled.form`
       border-radius : 2px;
       border : solid 2px var(--smoke);
     }
-
-    // button styling
-    & button {
-      width : 200px;
-      height : 40px;
-      font-size : medium;
-      background-color : var(--indigo-bluh);
-      color : white;
-      border-radius : 2px;
-      border : solid 2px var(--indigo-bluh);
-    }
-    & button:hover{
-      background-color : var(--indigo);
-      border : solid 2px var(--indigo);
-    }
-
     // select styling
     & select {
       width : 200px;
@@ -67,6 +51,15 @@ const StyledForm = styled.form`
     }
     & select:focus {
       color : black;
+    }
+    & .submit{
+      border : solid 2px var(--indigo);
+      color : var(--indigo);
+      background-color : white;
+    }
+    & .submit:hover{
+      color : white;
+      background-color : var(--indigo);
     }
 `
 
@@ -92,16 +85,17 @@ const SigninForm = () => {
     })
     var config = {
       method: 'post',
-      url: '/student',
+      url: '/api/student',
       headers: { 
         'Content-Type': 'application/json'
       },
       data : data
     }
     axios(config)
-    .then((res)=>{dispatchedUpdateProfileInfo(res.data)})    
+    .then((res)=>{dispatchedUpdateProfileInfo(res.data)}) 
+    .then(()=>{alert(`${e.target.name.value}님 만나서 반갑습니다!`)})       
     .then(()=>{navigate('/main')})
-    .catch((error)=>{console.log(error)});
+    .catch((e)=>{alert(e.response.data.message)});
   }
   // 
 
@@ -113,11 +107,11 @@ const SigninForm = () => {
         <input name="password" type="password" placeholder="password"/>
         <select name="department">
           <option>Department</option>
-          {departmentList.map((element)=>(
-            <option value={element}>{element}</option>
+          {departmentList.map((element, index)=>(
+            <option key={index} value={element}>{element}</option>
           ))}
         </select>
-        <button>Submit</button>
+        <input className='submit' name="submit" type="submit" value="Submit"/>
     </StyledForm>
   )
 }

@@ -1,55 +1,70 @@
 import React from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 import { useTable, useRowSelect } from 'react-table'
-
-
 const Styles = styled.div`
-  padding: 1rem;
-
-  table {
-    border-spacing: 0;
-    border: 1px solid black;
-
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
-
-    th,
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-
-      :last-child {
-        border-right: 0;
-      }
-    }
+  width : 1600px;
+  display : flex;
+  flex-direction : column;
+  align-items : stretch;
+  & table {
+    
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+  }
+  & table td{
+    border : solid 1px #ddd;
+    padding : 8px;
+  }
+  & table th{
+    border : solid 1px #ddd;
+    padding : 8px;
+  }
+  & table tr:nth-child(even){
+    background-color: #f2f2f2;
+  }
+  & table tr:hover {
+    background-color: #ddd;
+  }
+  & table th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--indigo);
+    color: white;
   }
 `
-
-const IndeterminateCheckbox = React.forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef()
-    const resolvedRef = ref || defaultRef
-
-    React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate
-    }, [resolvedRef, indeterminate])
-
-    return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    )
-  }
-)
-
 const PutEnrollmentTable = ({ data, columns}) => {
+  const {studentId} = useSelector(state=>state.profileReducer)
+  console.log(studentId)
+
+  const onPutEnrollment = (e, row)=>{
+    e.preventDefault();
+    
+    var data = JSON.stringify({
+      studentId : studentId,
+      courseId : parseInt(row.original.courseId),
+    })
+    console.log(data)
+    var config = {
+      method: 'put',
+      url: '/api/enrolment',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    }
+    axios(config)
+    .then(()=>{e.target.submit.style = "color : white; background-color : var(--mint);"}) 
+    .catch((error)=>{
+      console.log(error)
+      e.target.submit.style = "color : white; background-color : var(--red);"}
+      );
+
+    
+  }
+
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -73,16 +88,14 @@ const PutEnrollmentTable = ({ data, columns}) => {
           // The header can use the table's getToggleAllRowsSelectedProps method
           // to render a checkbox
           Header: ({ getToggleAllRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-            </div>
+            <div>신청 버튼</div>
           ),
           // The cell can use the individual row's getToggleRowSelectedProps method
           // to the render a checkbox
           Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
+            <form onSubmit={(e)=>{onPutEnrollment(e,row)}}>
+              <input name="submit" type="submit" value="submit"></input>
+            </form>
           ),
         },
         ...columns,
@@ -116,22 +129,6 @@ const PutEnrollmentTable = ({ data, columns}) => {
           })}
         </tbody>
       </table>
-      <button>신청하기</button>
-      <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-      <pre>
-        <code>
-          {JSON.stringify(
-            {
-              selectedRowIds: selectedRowIds,
-              'selectedFlatRows[].original': selectedFlatRows.map(
-                d => d.original
-              ),
-            },
-            null,
-            2
-          )}
-        </code>
-      </pre>
     </Styles>
   )
 }

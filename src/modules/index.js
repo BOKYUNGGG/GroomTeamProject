@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import profileReducer from "./profile";
-import createdCoursesReducer from "./createdCourses"
+import createCoursesReducer from "./createCourses"
 import reservedCoursesReducer from "./reservedCourses"
 import searchedCoursesReducer from "./searchedCourses"
 import studentCoursesReducer from "./studentCourses";
@@ -10,7 +10,7 @@ import tabReducer from "./tab";
 const rootReducer = combineReducers({
     tabReducer, 
     profileReducer, 
-    createdCoursesReducer, 
+    createCoursesReducer, 
     reservedCoursesReducer,
     searchedCoursesReducer,
     studentCoursesReducer,

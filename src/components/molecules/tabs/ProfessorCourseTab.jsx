@@ -13,7 +13,7 @@ import ProfessorCourseTable from '../../atoms/tables/ProfessorCourseTable'
 
 const ProfessorCourseTab = () => {
   // rudux
-  const profileInfo = useSelector(state=>state.profileReducer)
+  const {studentId} = useSelector(state=>state.profileReducer)
   const professorCoursesInfo = useSelector(state=>state.professorCoursesReducer)
   const dispatch = useDispatch()
   const dispatchedAdd = (data) => dispatch(addProfessorCourses(data))
@@ -22,8 +22,11 @@ const ProfessorCourseTab = () => {
   useEffect(()=>{
     // 모두 지우고
     dispatchedDelete()
-    
-    axios.get(`/course/professor/${profileInfo.studentId}`)
+    var config = {
+      method: 'get',
+      url: `/api/course/professor/${studentId}`,
+    };
+    axios(config)
     .then((res)=>{dispatchedAdd(res.data)})
     .catch((e)=>{console.log(e)})
   }, [])

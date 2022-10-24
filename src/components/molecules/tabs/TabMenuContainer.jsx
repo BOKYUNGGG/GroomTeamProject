@@ -12,6 +12,14 @@ const MenuItemWrapper = styled.div`
   align-items : center;
   border-radius : 4px 4px 0 0;
   border-bottom : none;
+  &.selected{
+    background-color : var(--indigo);
+    color : white;
+  }
+  &.non-selected{
+    background-color : var(--smoke);
+    color : white;
+  }
 `
 const StyledMenuItem = styled.div`
   height : 40px;
@@ -35,13 +43,14 @@ const TabMenuContainer = ({tabInfo, dispatchedDeleteTab, dispatchedToggleTab}) =
   const onToggle = (e) => {
     dispatchedToggleTab(e.currentTarget.id)
   }
+  console.log('tabInfo : ', tabInfo)
   return (
     <Wrapper>
       {
         tabInfo.map((element, index) => 
-        <MenuItemWrapper key={index+10000} style={{backgroundColor:"var(--"+element.color+")"}}>
-            <StyledMenuItem key={index+20000}>
-              <div key={index+30000} id={element.menu} onClick={onToggle}>{element.menu}</div>
+        <MenuItemWrapper key={index} className={element.className}>
+            <StyledMenuItem key={index}>
+              <div key={index} id={element.menu} onClick={onToggle}>{element.menu}</div>
             </StyledMenuItem>
           <StyledSvg 
             key={index+40000}

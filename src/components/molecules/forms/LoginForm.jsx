@@ -39,6 +39,15 @@ const StyledForm = styled.form`
       background-color : var(--indigo);
       border : solid 2px var(--indigo);
     }
+    & .submit{
+      border : solid 2px var(--indigo);
+      color : var(--indigo);
+      background-color : white;
+    }
+    & .submit:hover{
+      color : white;
+      background-color : var(--indigo);
+    }
 `
 
 const LoginForm = () => {
@@ -51,21 +60,24 @@ const LoginForm = () => {
 
 
   // onSubmit handler
-  const handleOnSubmit = (e) =>{
+  const onSubmit = (e) =>{
     // onSubmit 시에 React App 이 재실행되는 것을 막아줌 
     e.preventDefault() 
 
     // REST API Request
-    axios.get(`/student/${e.target.studentId.value}`)
-    .then((res)=>{dispatchedUpdateProfileInfo(res.data)})
+    axios.get(`/api/student/${e.target.studentId.value}`)
+    .then((res)=>{
+      dispatchedUpdateProfileInfo(res.data)
+      alert(`${res.data.name}님 어서오세요!`)
+    })    
     .then(()=>navigate('/main'))
-    .catch((e)=>{console.log(e)})
+    .catch((e)=>{alert(e)})
   }
   return (
-    <StyledForm onSubmit={handleOnSubmit}>
+    <StyledForm onSubmit={onSubmit}>
         <input type="text"     placeholder="Student Id" name="studentId"/>
         <input type="password" placeholder="Password"/>
-        <button>Submit</button>
+        <input className='submit' type="submit" value="Submit"></input>
     </StyledForm>
   )
 }

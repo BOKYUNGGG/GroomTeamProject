@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useSelector } from 'react-redux'
 import Logo from '../atoms/svgs/Logo'
 import styled from 'styled-components'
 const HeaderWrapper = styled.div`
@@ -62,7 +62,7 @@ const Dropdown = styled.div`
     justify-content : center;
     flex-direction : column;
     position : absolute;
-    top : 72px;
+    top : 114px;
   }
   & div button{
     padding : 8px;
@@ -77,13 +77,48 @@ const Dropdown = styled.div`
     background-color : var(--indigo);
   }
 `
+const ProfileWrapper = styled.div`
+  position : relative;
+  display : inline-block;
+  & div{
+    visibility : hidden;
+    width : 120px;
+    background-color : var(--indigo);
+    color : #fff;
+    text-align : center;
+    padding : 5px 0;
+    border-radius : 6px;
+    position : absolute;
+    width : 200px;
+    top : -10%;
+    left : -220px;
+    z-index : 1;
+  }
+  &:hover div{
+    visibility: visible;
+  }
+  & div::before{
+    content : " ";
+    position : absolute;
+    top : 24px;
+    left : 205px;
+    margin-left : -5px;
+    border : solid 5px var(--indigo);
+    border-color : transparent transparent transparent var(--indigo); 
+  }
+  & div p{
+    padding-left : 10px;
+    text-align: start;
+  }
+`
 const Header = ({dispatchedAddTab}) => {
+  const profileInfo = useSelector((state)=>state.profileReducer)
+
   // handler
   const onClick = (e) => {
     dispatchedAddTab({menu : e.target.value})
   }
 
-  
   return (
     <HeaderWrapper>
       <Logo/>
@@ -104,7 +139,17 @@ const Header = ({dispatchedAddTab}) => {
           </div>
         </Dropdown>
       </CenterWrapper>
-      <div>Profile</div>
+      <ProfileWrapper>
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="80" fill="var(--slate)" viewBox="0 0 16 16">
+          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          <text x="1" y="20" fontSize="4.5px">{profileInfo.name}</text>
+        </svg>
+        <div>
+          <p>학번 : {profileInfo.studentId}</p>
+          <p>학과 : {profileInfo.department}</p>
+          <p>{profileInfo.email}</p>
+        </div>
+      </ProfileWrapper>
     </HeaderWrapper>
   )
 }

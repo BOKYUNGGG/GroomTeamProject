@@ -1,5 +1,10 @@
 import React from 'react'
-
+import styled from 'styled-components';
+const Wrapper = styled.div`
+    & form input{
+        color : red;
+    }
+`
 const SearchForm = ({setGlobalFilter}) => {
     // Handler
     // form submit 시 element들의 value값을 props로 받아온 react-table Hook 함수에 전달
@@ -9,10 +14,12 @@ const SearchForm = ({setGlobalFilter}) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="filter"></input>
-            <button>Search</button>
-        </form>
+        <Wrapper>
+            <form onSubmit={handleSubmit}>
+                <input name="filter" placeholder='검색어'></input>
+                <button>Search</button>
+            </form>
+        </Wrapper>
     )
 }
 

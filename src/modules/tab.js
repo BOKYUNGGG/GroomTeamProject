@@ -12,6 +12,7 @@ export const deleteTab      = (data) => ({type : DELETE, data})
 const initialState = [
     {
         selected : true,
+        className : "selected",
         menu : "Search Course",
         color : "indigo"
     }
@@ -41,18 +42,20 @@ export default function tabReducer(state=initialState, action){
             return state.concat({
                 selected : false,
                 menu : action.data.menu,
+                className : "non-selected",
                 color : returnColor(action.data.menu)
             })
         // 동작 확인 완료
         case TOGGLE :
-            const toggledState = state.map(element => element.selected ? {...element, selected : false} : element) 
-            return toggledState.map(element => element.menu == action.data ? {...element, selected :true} : element)
+            const toggledState = state.map(element => element.selected ? {...element, className : "non-selected", selected : false} : element) 
+            return toggledState.map(element => element.menu == action.data ? {...element, className : "selected", selected :true} : element)
         // 동작 확인 완료
         case DELETE : 
             if (state.length == 1) return state
             else {
                 const deletedState = state.filter(element => element.menu !== action.data)    
                 deletedState[0].selected = true
+                deletedState[0].className = "selected"
                 return deletedState
             }
         default : 
