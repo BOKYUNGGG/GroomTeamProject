@@ -19,6 +19,7 @@
     "immer": "^9.0.15",
     "install": "^0.13.0",
     "namor": "^2.0.4",
+    "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",

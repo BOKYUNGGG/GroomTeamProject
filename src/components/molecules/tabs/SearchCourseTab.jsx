@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addSearchedCourses, deleteAllSearchedCourses } from '../../../modules/searchedCourses'
 import { addReservedCourses } from '../../../modules/reservedCourses'
 import axios from 'axios'
+import qs from "qs";
+
+
 import {courseColumns} from '../../../assets/courseData'
 import SearchCourseTable from '../../atoms/tables/SearchCourseTable'
 const Wrapper = styled.div`
@@ -29,6 +32,12 @@ const FormWrapper = styled.div`
     color : white;
   }
 `
+const EmptyBox = styled.div`
+  width : 100%;
+  height : 600px;
+  text-align : center;
+  line-height : 600px;
+`
 const SearchCourseTab = () => {
 
   // redux
@@ -37,30 +46,33 @@ const SearchCourseTab = () => {
   const deleteAllSearchedCoursesInfo = () => dispatch(deleteAllSearchedCourses())
   const addReserved = (data) => dispatch(addReservedCourses(data))
   const data = useSelector(state=>state.searchedCoursesReducer)
-
-
+  
+ 
   // onSubmit handler
   const handleOnSubmit = (e) =>{
     e.preventDefault() 
     // REST API 
     deleteAllSearchedCoursesInfo()
-    const data = {
+    const params = {
         keyword : e.target.keyword.value,
         page : 0,
         semester : e.target.semester.value,
         size : 1000,
         type : e.target.type.value,
-        year : e.target.year.value
+        year : parseInt(e.target.year.value)
     }
-    console.log('Search Course Option : ', data)
-    axios.get('/api/course/courses',{
-      params : data
+    const config = {
+      method:"get",
+      params : params,
+      url: '/api/course/courses'
     }
-    )
+    
+
+    axios(config)
     .then((res)=>{addSearchedCoursesInfo(res.data)})
     .catch((e)=>{alert(e)})
   }
-
+  
   return (
     <Wrapper>
       <FormWrapper>
@@ -74,6 +86,7 @@ const SearchCourseTab = () => {
             <option value="2022">2022</option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
+            <option value="2019">2019</option>
           </select>
           <select name="semester">
             <option value="SPRING">1학기</option>
@@ -89,11 +102,10 @@ const SearchCourseTab = () => {
         !data ? 
         (null) : ( 
           (data.length == 0) ? 
-            (<div>검색 결과가 없습니다.</div>) : (<SearchCourseTable data={data} columns={courseColumns} addReserved={addReserved}></SearchCourseTable>)
+            (<EmptyBox>검색 결과가 없습니다.</EmptyBox>) : 
+            (<SearchCourseTable data={data} columns={courseColumns} addReserved={addReserved}></SearchCourseTable>)
         )
       }
-      
-      
     </Wrapper>
   )
 }

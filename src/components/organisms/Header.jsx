@@ -124,18 +124,18 @@ const Header = ({dispatchedAddTab}) => {
       <Logo/>
       <CenterWrapper>
         <ButtonWrapper>
-          <button onClick={onClick} value="Search Course">Search Course</button>
+          <button onClick={onClick} value="강의검색">강의검색</button>
         </ButtonWrapper>
         <Dropdown>Student
           <div>
-            <button onClick={onClick} value="Student's Course">Student's Course</button>
-            <button onClick={onClick} value="Put Enrollment">Put Enrollment</button>
+            <button onClick={onClick} value="신청강의조회">신청강의조회</button>
+            <button onClick={onClick} value="수강신청">수강신청</button>
           </div>
         </Dropdown>
         <Dropdown>Professor
           <div>
-            <button onClick={onClick} value="Professor's Course">Professor's Course</button>
-            <button onClick={onClick} value="Create Course">Create Course</button>
+            <button onClick={onClick} value="나의개설강의">나의개설강의</button>
+            <button onClick={onClick} value="강의개설">강의개설</button>
           </div>
         </Dropdown>
       </CenterWrapper>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {updateProfileInfo} from '../../../modules/profile'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
+import qs from 'qs'
 import styled from 'styled-components'
 const StyledForm = styled.form`
     display : flex;
@@ -72,6 +73,9 @@ const LoginForm = () => {
     })    
     .then(()=>navigate('/main'))
     .catch((e)=>{alert(e)})
+
+
+    
   }
   return (
     <StyledForm onSubmit={onSubmit}>

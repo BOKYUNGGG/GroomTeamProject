@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import {changeCreateCourses, deleteCreateCourses} from '../../../modules/createCourses'
 import {departmentList} from '../../../assets/courseData'
 import styled from 'styled-components'
-
 const FormWrapper = styled.div`
   display : flex;
   margin : 10px;
@@ -43,7 +42,7 @@ const FormWrapper = styled.div`
     border : solid 2px var(--indigo);
   }
   & form div input{
-    width : 246px;
+    width : 230px;
     border-radius : 4px;
     border : solid 2px var(--smoke);
   }
@@ -55,7 +54,7 @@ const FormWrapper = styled.div`
     color: var(--smoke);
   }
   & form div select{
-    width : 246px;
+    width : 230px;
     border-radius : 4px;
     border : solid 2px var(--smoke);
   }
@@ -67,19 +66,6 @@ const FormWrapper = styled.div`
     border : none;
     border-radius : 4px;
     height : 40px;
-  }
-`
-const PlusBoxWrapper = styled.div`
-  margin : 10px;
-  width : 480px;
-  height : 435px;
-  display : flex;
-  border : solid 2px var(--smoke);
-  width : 416px;
-  justify-content : center;
-  align-items : center;
-  &:hover{
-    background-color : #f3f5f7;
   }
 `
 const CreateCourseForm = ({data}) => {

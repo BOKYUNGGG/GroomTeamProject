@@ -8,12 +8,25 @@ const Wrapper = styled.div`
   flex-direction : column;
   align-items : center;
 `
+const EmptyBox = styled.div`
+  width : 100%;
+  height : 600px;
+  text-align : center;
+  line-height : 600px;
+`
 const PutEnrollmentTab = () => {
   const reservedData = useSelector(state=>state.reservedCoursesReducer)
-  console.log('reservedData :',reservedData)
+  console.log(reservedData)
   return (
     <Wrapper>
-      <PutEnrollmentTable data={reservedData.slice(1, reservedData.length)} columns={courseColumns}></PutEnrollmentTable>
+      {
+        !reservedData ? 
+        (null) : ( 
+          (reservedData.length == 0) ? 
+            (<EmptyBox>강의검색 ➙ 관심과목 담기를 진행해주세요. </EmptyBox>) : 
+            (<PutEnrollmentTable data={reservedData} columns={courseColumns}/>)
+        )
+      }
     </Wrapper>
   )
 }

@@ -1,6 +1,3 @@
-// Tab Menu state를 관리하기 위한 module입니다.
-import produce from "immer";
-
 const ADD           = 'tab/ADD'
 const TOGGLE        = 'tab/TOGGLE'
 const DELETE        = 'tab/DELETE'
@@ -13,22 +10,22 @@ const initialState = [
     {
         selected : true,
         className : "selected",
-        menu : "Search Course",
+        menu : "강의검색",
         color : "indigo"
     }
 ]
 
 const returnColor = (menu) => {
     switch (menu){
-        case "Search Course":
+        case "강의검색":
             return "indigo"
-        case "Student's Course":
+        case "신청강의조회":
             return "orange"
-        case "Put Enrollment":
+        case "수강신청":
             return "mint"
-        case "Professor's Course":
+        case "나의개설강의":
             return "purple"
-        case "Create Course":
+        case "강의개설":
             return "blue"
     }
 }

@@ -1,10 +1,9 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useGlobalFilter, useSortBy, useTable, usePagination, useRowSelect } from 'react-table'
 import TableSearchForm from '../../molecules/forms/TableSearchForm'
 import styled from 'styled-components'
 const Styles = styled.div`
-  width : 1600px;
+  width : 100%;
   display : flex;
   flex-direction : column;
   align-items : stretch;
@@ -48,10 +47,14 @@ const TableTopWrapper = styled.div`
 `
 const PagenationWrapper = styled.div`
   display : flex;
+  justify-content : center;
   align-items : center;
   font-size : medium;
   & svg:hover {
     fill : var(--indigo);
+  }
+  & button{
+    align-self : flex-end;
   }
 `
 const IndeterminateCheckbox = React.forwardRef(
@@ -161,6 +164,7 @@ function SearchCourseTable({addReserved, columns, data }) {
         This is just a very basic UI implementation:
       */}
       <PagenationWrapper>
+        <button onClick={()=>{selectedFlatRows.map((element)=>addReserved(element.original))}}>관심과목 담기</button>
         <svg 
           onClick={() => previousPage()} disabled={!canPreviousPage}
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--indigo-bluh)" viewBox="0 0 16 16">
@@ -173,7 +177,6 @@ function SearchCourseTable({addReserved, columns, data }) {
           <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
         </svg>
       </PagenationWrapper>
-      <button onClick={()=>{selectedFlatRows.map((element)=>addReserved(element.original))}}>관심과목 담기</button>
     </Styles>
   )
 }

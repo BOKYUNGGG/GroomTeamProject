@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 import { useTable, useRowSelect } from 'react-table'
 const Styles = styled.div`
-  width : 1600px;
+  width : 100%;
   display : flex;
   flex-direction : column;
   align-items : stretch;
@@ -34,65 +36,9 @@ const Styles = styled.div`
   }
 `
 
-const IndeterminateCheckbox = React.forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef()
-    const resolvedRef = ref || defaultRef
-
-    React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate
-    }, [resolvedRef, indeterminate])
-
-    return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    )
-  }
-)
-
 const StudentCourseTable = ({ data, columns}) => {
-  // Use the state and functions returned from useTable to build your UI
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    selectedFlatRows,
-    state: { selectedRowIds },
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useRowSelect,
-    hooks => {
-      hooks.visibleColumns.push(columns => [
-        // Let's make a column for selection
-        {
-          id: 'selection',
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-            </div>
-          ),
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
-          ),
-        },
-        ...columns,
-      ])
-    }
-  )
+  const {getTableProps,getTableBodyProps,headerGroups,rows,prepareRow,} = useTable({columns,data,},useRowSelect)
 
-  // Render the UI for your table
   return (
     <Styles>
       <table {...getTableProps()}>

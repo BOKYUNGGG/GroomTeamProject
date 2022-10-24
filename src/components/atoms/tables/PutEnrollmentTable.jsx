@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import qs from 'qs'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTable, useRowSelect } from 'react-table'
+import { deleteReservedCourses } from '../../../modules/reservedCourses'
+
 const Styles = styled.div`
-  width : 1600px;
+  width : 100%;
   display : flex;
   flex-direction : column;
   align-items : stretch;
@@ -35,15 +38,44 @@ const Styles = styled.div`
     color: white;
   }
 `
+const Submit = styled.div`
+  & form input{
+    border : none;
+    border-radius : 4px;
+    color : white;
+    background-color : var(--indigo-bluh);
+  }
+  & form input:hover{
+    background-color : var(--indigo);
+  }
+`
+const Delete = styled.div`
+  & form input{
+    border : none;
+    border-radius : 4px;
+    color : white;
+    background-color : var(--red-bluh);
+  }
+  & form input:hover{
+    background-color : var(--red);
+  }
+`
 const PutEnrollmentTable = ({ data, columns}) => {
+  // redux
   const {studentId} = useSelector(state=>state.profileReducer)
+  const dispatch = useDispatch()
+  const dispatchedDelete = (data) => dispatch(deleteReservedCourses(data))
+
   // 수강신청 버튼 기능
   const onPutEnrollment = (e, row)=>{
     e.preventDefault();
-    var data = JSON.stringify({
+    e.target.submit.style = "color : white; background-color : var(--orange);"
+
+    var data = {
       studentId : studentId,
       courseId : parseInt(row.original.courseId),
-    })
+    }
+    
     console.log(data)
     var config = {
       method: 'put',
@@ -51,31 +83,23 @@ const PutEnrollmentTable = ({ data, columns}) => {
       headers: { 
         'Content-Type': 'application/json'
       },
-      data : data
+      params : data
     }
     axios(config)
+    .then((res)=>console.log(res.data))
     .then(()=>{e.target.submit.style = "color : white; background-color : var(--mint);"}) 
     .catch((error)=>{
       console.log(error)
       e.target.submit.style = "color : white; background-color : var(--red);"}
       );
   }
-
+  // 관심과목 삭제
+  const onDeleteReserved = (e, row) =>{
+    e.preventDefault();
+    dispatchedDelete(row.original.courseId)
+  }
   // react-table
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    selectedFlatRows,
-    state: { selectedRowIds },
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useRowSelect,
+  const {getTableProps,getTableBodyProps,headerGroups,rows,prepareRow,} = useTable({columns,data,}, useRowSelect,
     hooks => {
       hooks.visibleColumns.push(columns => [
         // Let's make a column for selection
@@ -83,9 +107,18 @@ const PutEnrollmentTable = ({ data, columns}) => {
           id: 'selection',
           Header: (<div>신청 버튼</div>),
           Cell: ({ row }) => (
-            <form onSubmit={(e)=>{onPutEnrollment(e,row)}}>
-              <input name="submit" type="submit" value="submit"></input>
-            </form>
+            <div>
+              <Submit>
+                <form onSubmit={(e)=>{onPutEnrollment(e,row)}}>
+                  <input name="submit" type="submit" value="submit"></input>
+                </form>
+              </Submit>
+              <Delete>
+                <form onSubmit={(e)=>{onDeleteReserved(e,row)}}>
+                  <input name="submit" type="submit" value="delete"></input>
+                </form>
+              </Delete>
+            </div>
           ),
         },
         ...columns,
