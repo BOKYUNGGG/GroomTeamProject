@@ -1,20 +1,19 @@
 pipeline {
     agent any
+    tools {
+        nodeks "NodeJS 19.0.0"
+    }
     stages {
-        stage('READY'){
+        stage('INSTALL'){
             steps{
-                sh 'echo ready'
+                sh 'npm install'
             }
         }
-        stage('START'){
+        stage('BUILD'){
             steps{
-                sh 'echo start'
+                sh 'npm run build'
             }
         }
-        stage('END'){
-            steps{
-                sh 'echo end'
-            }
-        }
+
     }
 }
