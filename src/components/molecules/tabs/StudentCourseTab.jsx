@@ -38,19 +38,17 @@ const StudentCourseTab = () => {
   const onSubmit = (e) =>{
     e.preventDefault()
     dispatchedDelete()
-    const data = JSON.stringify({
+    const data = {
       semester : e.target.semester.value,
       studentId : profileInfo.studentId,
       year : parseInt(e.target.year.value)
+    }
+  
+    axios.get("api/enrolment", {
+      params : data
     })
-    
-    
-    axios.get(`/api/enrolment?${data}`)
     .then((res)=>{dispatchedAdd(res.data.courses)})
-    .catch((e)=>{
-      console.log(e)
-      alert(e)
-    })
+    .catch((e)=>alert(e))
   }
 
   useEffect(()=>{
