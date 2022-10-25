@@ -22,7 +22,7 @@ const PutEnrollmentTab = () => {
       {
         !reservedData ? 
         (null) : ( 
-          (reservedData.length == 0) ? 
+          (reservedData.length === 0) ? 
             (<EmptyBox>강의검색 ➙ 관심과목 담기를 진행해주세요. </EmptyBox>) : 
             (<PutEnrollmentTable data={reservedData} columns={courseColumns}/>)
         )

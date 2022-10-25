@@ -4,9 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addSearchedCourses, deleteAllSearchedCourses } from '../../../modules/searchedCourses'
 import { addReservedCourses } from '../../../modules/reservedCourses'
 import axios from 'axios'
-import qs from "qs";
-
-
 import {courseColumns} from '../../../assets/courseData'
 import SearchCourseTable from '../../atoms/tables/SearchCourseTable'
 const Wrapper = styled.div`
@@ -67,7 +64,8 @@ const SearchCourseTab = () => {
       url: '/api/course/courses'
     }
     axios(config)
-    .then((res)=>{addSearchedCoursesInfo(res.data)})
+    .then((res)=>{
+      addSearchedCoursesInfo(res.data)})
     .catch((e)=>{alert(e)})
   }
   
@@ -99,7 +97,7 @@ const SearchCourseTab = () => {
       {
         !data ? 
         (null) : ( 
-          (data.length == 0) ? 
+          (data.length === 0) ? 
             (<EmptyBox>검색 결과가 없습니다.</EmptyBox>) : 
             (<SearchCourseTable data={data} columns={courseColumns} addReserved={addReserved}></SearchCourseTable>)
         )

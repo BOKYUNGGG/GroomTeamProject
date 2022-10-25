@@ -17,7 +17,6 @@ export default function searchedCoursesReducer(state=initialState, action){
         case DELETE_ALL :
             return []
 
-            
         default : 
             return state
     }

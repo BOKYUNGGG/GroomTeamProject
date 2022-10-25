@@ -27,6 +27,8 @@ const returnColor = (menu) => {
             return "purple"
         case "강의개설":
             return "blue"
+        default :
+            return null
     }
 }
 export default function tabReducer(state=initialState, action){
@@ -34,7 +36,7 @@ export default function tabReducer(state=initialState, action){
         // 동작 확인 완료
         case ADD :
             for (let element of state){
-                if(element.menu == action.data.menu) return state
+                if(element.menu === action.data.menu) return state
             }
             return state.concat({
                 selected : false,
@@ -45,10 +47,10 @@ export default function tabReducer(state=initialState, action){
         // 동작 확인 완료
         case TOGGLE :
             const toggledState = state.map(element => element.selected ? {...element, className : "non-selected", selected : false} : element) 
-            return toggledState.map(element => element.menu == action.data ? {...element, className : "selected", selected :true} : element)
+            return toggledState.map(element => element.menu === action.data ? {...element, className : "selected", selected :true} : element)
         // 동작 확인 완료
         case DELETE : 
-            if (state.length == 1) return state
+            if (state.length === 1) return state
             else {
                 const deletedState = state.filter(element => element.menu !== action.data)    
                 deletedState[0].selected = true

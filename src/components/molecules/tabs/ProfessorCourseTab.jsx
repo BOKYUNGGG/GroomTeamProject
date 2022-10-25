@@ -41,7 +41,7 @@ const ProfessorCourseTab = () => {
       {
         !professorCoursesInfo ? 
         (null) : ( 
-          (professorCoursesInfo.length == 0) ? 
+          (professorCoursesInfo.length === 0) ? 
             (<EmptyBox>{name}님께서 개설한 강좌가 없습니다.</EmptyBox>) : 
             (<ProfessorCourseTable data={professorCoursesInfo} columns={courseColumns}/>)        
           )

@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-import qs from 'qs'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTable, useRowSelect } from 'react-table'
 import { deleteReservedCourses } from '../../../modules/reservedCourses'

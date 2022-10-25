@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
-import qs from 'qs'
 import styled from 'styled-components'
 import {courseColumns} from '../../../assets/courseData'
 import StudentCourseTable from '../../atoms/tables/StudentCourseTable'
@@ -39,7 +38,7 @@ const StudentCourseTab = () => {
   const onSubmit = (e) =>{
     e.preventDefault()
     dispatchedDelete()
-    const data = qs.stringify({
+    const data = JSON.stringify({
       semester : e.target.semester.value,
       studentId : profileInfo.studentId,
       year : parseInt(e.target.year.value)
@@ -92,7 +91,7 @@ const StudentCourseTab = () => {
       {
         !studentCourseInfo ? 
         (null) : ( 
-          (studentCourseInfo.length == 0) ? 
+          (studentCourseInfo.length === 0) ? 
             (<EmptyBox>{profileInfo.name}님께서 신청한 강좌가 없습니다.</EmptyBox>) : 
             (<StudentCourseTable data={studentCourseInfo} columns={courseColumns}/>)        
           )

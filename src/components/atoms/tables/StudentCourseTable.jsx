@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
-import { useSelector } from 'react-redux'
 import { useTable, useRowSelect } from 'react-table'
 const Styles = styled.div`
   width : 100%;

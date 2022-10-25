@@ -13,15 +13,15 @@ const Wrapper = styled.div`
     border-bottom-right-radius : 10px;
 `
 const Content = ({tabsInfo}) => {
-    const selectedTab = tabsInfo.find(element=>element.selected==true)
+    const selectedTab = tabsInfo.find(element=>element.selected===true)
     
     return (
         <Wrapper>
-            {selectedTab.menu=="강의검색" ? <SearchCourseTab/> : null}
-            {selectedTab.menu=="신청강의조회" ? <StudentCourseTab/> : null}
-            {selectedTab.menu=="수강신청" ? <PutEnrollmentTab/> : null}
-            {selectedTab.menu=="나의개설강의" ? <ProfessorCourseTab/> : null}
-            {selectedTab.menu=="강의개설" ? <CreateCourseTab/> : null}
+            {selectedTab.menu==="강의검색" ? <SearchCourseTab/> : null}
+            {selectedTab.menu==="신청강의조회" ? <StudentCourseTab/> : null}
+            {selectedTab.menu==="수강신청" ? <PutEnrollmentTab/> : null}
+            {selectedTab.menu==="나의개설강의" ? <ProfessorCourseTab/> : null}
+            {selectedTab.menu==="강의개설" ? <CreateCourseTab/> : null}
         </Wrapper>
     )
 }

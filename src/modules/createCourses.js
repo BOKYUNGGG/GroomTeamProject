@@ -39,19 +39,17 @@ export default function createCoursesReducer(state=initialState, action){
             
         case CHANGE :
             return state.map((element)=>{
-                if(element.id == action.data.id) return action.data
+                if(element.id === action.data.id) return action.data
                 else return element
             })
         case DELETE :
-            console.log('DELETE create course')
-            if (state.length == 1) return state
+            if (state.length === 1) return state
             else {
                 return state.filter((element)=>element.id !== action.data.id)
             }
         case DELETE_ALL :
-            console.log('DELETE ALL create course')
             nextId = 1
-            return initialState
+            return []
 
             
         default : 

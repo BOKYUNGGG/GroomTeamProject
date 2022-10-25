@@ -15,8 +15,6 @@ const TableSearchForm = ({onSubmit}) => {
         event.preventDefault();
         onSubmit(event.target.elements.filter.value)
     }
-
-
     return (
     <Wrapper>
         <form onSubmit={handleSubmit}>

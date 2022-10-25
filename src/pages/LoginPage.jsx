@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
 import LoginForm from '../components/molecules/forms/LoginForm'
 const Wrapper = styled.div`
     display : flex;
