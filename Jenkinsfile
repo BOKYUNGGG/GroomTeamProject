@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        nodeks "NodeJS 19.0.0"
-    }
+    tools {nodejs "NodeJS 19.0.0"}
     stages {
         stage('INSTALL'){
             steps{
