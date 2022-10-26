@@ -61,12 +61,14 @@ const SearchCourseTab = () => {
     const config = {
       method:"get",
       params : params,
-      url: '/api/course/courses'
+      url: '/course/courses'
     }
     axios(config)
     .then((res)=>{
       addSearchedCoursesInfo(res.data)})
-    .catch((e)=>{alert(e)})
+    .catch((e)=>{
+      console.log(e)
+      alert(e)})
   }
   
   return (

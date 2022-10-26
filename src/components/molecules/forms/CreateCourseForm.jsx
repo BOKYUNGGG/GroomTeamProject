@@ -97,7 +97,7 @@ const CreateCourseForm = ({data}) => {
       })
       var config = {
         method: 'post',
-        url: '/api/course',
+        url: '/course',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -107,7 +107,9 @@ const CreateCourseForm = ({data}) => {
       .then((res)=>console.log(res.data))
       .then(()=>{e.target.submit.style = "background-color : var(--mint);"}) 
       .then(()=>{e.target.submit.innerText = "Success !!;"})   
-      .catch((e)=>{alert(e.response.data.message)});
+      .catch((e)=>{
+        console.log(e)
+        alert(e.response.data.message)});
     }
 
     return (

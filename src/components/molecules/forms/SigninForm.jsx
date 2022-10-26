@@ -85,7 +85,7 @@ const SigninForm = () => {
     })
     var config = {
       method: 'post',
-      url: '/api/student',
+      url: '/student',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -95,7 +95,9 @@ const SigninForm = () => {
     .then((res)=>{dispatchedUpdateProfileInfo(res.data)}) 
     .then(()=>{alert(`${e.target.name.value}님 만나서 반갑습니다!`)})       
     .then(()=>{navigate('/main')})
-    .catch((e)=>{alert(e.response.data.message)});
+    .catch((e)=>{
+      console.log(e)
+      alert(e.response.data.message)});
   }
   // 
 

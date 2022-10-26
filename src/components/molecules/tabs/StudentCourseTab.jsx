@@ -44,11 +44,13 @@ const StudentCourseTab = () => {
       year : parseInt(e.target.year.value)
     }
   
-    axios.get("api/enrolment", {
+    axios.get("/enrolment", {
       params : data
     })
     .then((res)=>{dispatchedAdd(res.data.courses)})
-    .catch((e)=>alert(e))
+    .catch((e)=>{
+      console.log(e)
+      alert(e)})
   }
 
   useEffect(()=>{

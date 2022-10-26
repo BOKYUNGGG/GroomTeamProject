@@ -65,13 +65,15 @@ const LoginForm = () => {
     e.preventDefault() 
 
     // REST API Request
-    axios.get(`/api/student/${e.target.studentId.value}`)
+    axios.get(`/student/${e.target.studentId.value}`)
     .then((res)=>{
       dispatchedUpdateProfileInfo(res.data)
       alert(`${res.data.name}님 어서오세요!`)
     })    
     .then(()=>navigate('/main'))
-    .catch((e)=>{alert(e)})
+    .catch((e)=>{
+      console.log(e)
+      alert(e)})
 
 
     

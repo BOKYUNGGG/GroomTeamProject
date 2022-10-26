@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import axios from 'axios';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './modules/index'
@@ -12,6 +12,7 @@ export const store = configureStore({
   reducer : rootReducer
 })
 
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/api' : 'http://ahci.ddns.net:8080';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

@@ -29,11 +29,13 @@ const ProfessorCourseTab = () => {
     dispatchedDelete()
     var config = {
       method: 'get',
-      url: `/api/course/professor/${studentId}`,
+      url: `/course/professor/${studentId}`,
     };
     axios(config)
     .then((res)=>{dispatchedAdd(res.data)})
-    .catch((e)=>{console.log(e)})
+    .catch((e)=>{
+      alert(e)
+      console.log(e)})
   }, [])
 
   return (

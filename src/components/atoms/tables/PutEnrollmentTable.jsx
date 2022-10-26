@@ -77,7 +77,7 @@ const PutEnrollmentTable = ({ data, columns}) => {
     
     var config = {
       method: 'put',
-      url: '/api/enrolment',
+      url: '/enrolment',
       headers: { 
         'Content-Type': 'application/json'
       },
