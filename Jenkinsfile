@@ -1,20 +1,19 @@
 pipeline {
-    agent any
-    tools {nodejs "NodeJS 19.0.0"}
+    agent {
+        docker {
+            image 'node:lts-bullseye-slim' 
+            args '-p 3000:3000' 
+        }
+    }
     stages {
-        stage('INSTALL'){
-            steps{
-                sh 'npm install'
+        stage('Install') { 
+            steps {
+                sh 'npm install' 
             }
         }
-        stage('BUILD'){
-            steps{
-                sh 'npm run build'
-            }
-        }
-        stage('Test'){
-            steps{
-                sh 'npm test'
+        stage('Build') { 
+            steps {
+                sh 'npm run build' 
             }
         }
     }
