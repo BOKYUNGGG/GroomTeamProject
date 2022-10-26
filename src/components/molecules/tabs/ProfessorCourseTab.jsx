@@ -29,7 +29,7 @@ const ProfessorCourseTab = () => {
     dispatchedDelete()
     var config = {
       method: 'get',
-      url: `/course/professor/${studentId}`,
+      url: `http://ahci.ddns.net:8080/course/professor/${studentId}`,
     };
     axios(config)
     .then((res)=>{dispatchedAdd(res.data)})

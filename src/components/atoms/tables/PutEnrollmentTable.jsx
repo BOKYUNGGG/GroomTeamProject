@@ -77,7 +77,7 @@ const PutEnrollmentTable = ({ data, columns}) => {
     
     var config = {
       method: 'put',
-      url: '/enrolment',
+      url: 'http://ahci.ddns.net:8080/enrolment',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -87,6 +87,7 @@ const PutEnrollmentTable = ({ data, columns}) => {
     .then(()=>{e.target.submit.style = "color : white; background-color : var(--mint);"}) 
     .catch((error)=>{
       console.log(error)
+      alert(error)
       e.target.submit.style = "color : white; background-color : var(--red);"}
       );
   }

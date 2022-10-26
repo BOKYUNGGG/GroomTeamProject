@@ -95,21 +95,21 @@ const CreateCourseForm = ({data}) => {
         title : e.target.title.value,
         year : parseInt(e.target.year.value),
       })
+    
       var config = {
         method: 'post',
-        url: '/course',
+        url: 'http://ahci.ddns.net:8080/course',
         headers: { 
           'Content-Type': 'application/json'
         },
         data : courseInfo
       }
       axios(config)
-      .then((res)=>console.log(res.data))
       .then(()=>{e.target.submit.style = "background-color : var(--mint);"}) 
       .then(()=>{e.target.submit.innerText = "Success !!;"})   
       .catch((e)=>{
         console.log(e)
-        alert(e.response.data.message)});
+        alert(e)});
     }
 
     return (

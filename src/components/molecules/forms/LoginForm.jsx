@@ -65,7 +65,7 @@ const LoginForm = () => {
     e.preventDefault() 
 
     // REST API Request
-    axios.get(`/student/${e.target.studentId.value}`)
+    axios.get(`http://ahci.ddns.net:8080/student/${e.target.studentId.value}`)
     .then((res)=>{
       dispatchedUpdateProfileInfo(res.data)
       alert(`${res.data.name}님 어서오세요!`)

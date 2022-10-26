@@ -12,7 +12,7 @@ export const store = configureStore({
   reducer : rootReducer
 })
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/api' : 'http://ahci.ddns.net:8080';
+axios.defaults.baseURL = 'http://ahci.ddns.net:8080'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

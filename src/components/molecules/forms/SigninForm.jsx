@@ -83,9 +83,10 @@ const SigninForm = () => {
       department : e.target.department.value,
       name : e.target.name.value,
     })
+    console.log(data)
     var config = {
       method: 'post',
-      url: '/student',
+      url: 'http://ahci.ddns.net:8080/student',
       headers: { 
         'Content-Type': 'application/json'
       },
@@ -97,12 +98,12 @@ const SigninForm = () => {
     .then(()=>{navigate('/main')})
     .catch((e)=>{
       console.log(e)
-      alert(e.response.data.message)});
+      alert(e)});
   }
   // 
 
   return (
-    <StyledForm onSubmit={handleOnSubmit}>
+    <StyledForm onSubmit={(e)=>{handleOnSubmit(e)}}>
         <input name="studentId" type="text" placeholder="studentId"/>
         <input name="name" type="text" placeholder="name"/>
         <input name="email" type="email" placeholder="example@example.com"/>

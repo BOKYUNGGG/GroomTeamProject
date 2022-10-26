@@ -29,11 +29,7 @@ const CreateCourseTab = () => {
   const dispatchedAdd = () => dispatch(addCreateCourses())
   const dispatchedDeleteAll = () => dispatch(deleteAllCreateCourses())
   useEffect(()=>{dispatchedDeleteAll()}, [])
-
-
   const onAddForm = () => {dispatchedAdd()}
-  
- 
   return (
     <Wrapper>
       {
