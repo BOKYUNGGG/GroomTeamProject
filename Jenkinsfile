@@ -16,7 +16,7 @@ pipeline {
 						stage ("${entry.key} Build"){
 							if(entry.value){
 								var = entry.key
-								sh "docker-compose build ${var.toLowerCase()}"
+								sh "docker build -t ${var.toLowerCase()} ."
 							}	
 						}
 					}
