@@ -2,7 +2,6 @@ pipeline {
     agent any
 	tools {
 			nodejs "NodeJS 19.0.0"
-			docker "docker-latest"
 	}
     stages {
         stage('Install') {
@@ -15,9 +14,10 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('Docker') {
+        stage('Deploy') {
             steps {
-                sh 'docker image ls'   
+                sh 'ls -al'   
+				echo "deploy"
             }
         }
     }
