@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'node:16-alpine'
+			args '-p 3001:3000' 
         }
     }
     stages {
