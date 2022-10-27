@@ -1,19 +1,37 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16-alpine'
-			args '-p 3001:3000' 
-        }
-    }
+    agent none
+    //기본적으로 체크아웃을 하지 않는 옵션
+    options { skipDefaultCheckout(true) }
     stages {
-        stage('Install') {
+        stage('Checkout repository') {
+            agent any
             steps {
-                sh 'npm install'
+                checkout scm
             }
         }
-		stage('Build') {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:16.6.0'
+                }
+            }
             steps {
+                sh 'npm install'
                 sh 'npm run build'
+            }
+        }
+        stage('Docker build') {
+            agent any
+            steps {
+                sh 'docker build -t {image_name}:latest .'
+            }
+        }
+        stage('Docker run') {
+            agent any
+            steps {
+                sh 'docker ps'
+                sh 'docker container ls -a'
+                sh 'docker images'
             }
         }
     }
