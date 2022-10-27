@@ -1,23 +1,12 @@
 pipeline {
-    agent any
-	tools {
-			nodejs "NodeJS 19.0.0"
-	}
+    agent none
     stages {
-        stage('Install') {
-            steps {
-                sh 'npm install'
+        stage('Front-end') {
+            agent {
+                docker { image 'node:16.13.1-alpine' }
             }
-        }
-		stage('Build') {
             steps {
-                sh 'npm run build'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'ls -al'   
-				echo "deploy"
+                sh 'node --version'
             }
         }
     }
