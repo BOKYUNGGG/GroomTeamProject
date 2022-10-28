@@ -11,8 +11,8 @@ import rootReducer from './modules/index'
 export const store = configureStore({
   reducer : rootReducer
 })
+axios.defaults.baseURL = "http://a631f11ee87484233824748db3dca993-de3f1a97e67af615.elb.ap-northeast-2.amazonaws.com"
 
-axios.defaults.baseURL = 'a631f11ee87484233824748db3dca993-de3f1a97e67af615.elb.ap-northeast-2.amazonaws.com'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

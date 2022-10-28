@@ -93,7 +93,9 @@ const SigninForm = () => {
       data : data
     }
     axios(config)
-    .then((res)=>{dispatchedUpdateProfileInfo(res.data)}) 
+    .then((res)=>{
+      console.log(res)
+      dispatchedUpdateProfileInfo(res.data)}) 
     .then(()=>{alert(`${e.target.name.value}님 만나서 반갑습니다!`)})       
     .then(()=>{navigate('/main')})
     .catch((e)=>{

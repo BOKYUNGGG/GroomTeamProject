@@ -67,6 +67,7 @@ const LoginForm = () => {
     // REST API Request
     axios.get(`/student/${e.target.studentId.value}`)
     .then((res)=>{
+      console.log(res)
       dispatchedUpdateProfileInfo(res.data)
       alert(`${res.data.name}님 어서오세요!`)
     })    
