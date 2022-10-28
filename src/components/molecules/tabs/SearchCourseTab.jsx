@@ -61,7 +61,7 @@ const SearchCourseTab = () => {
     const config = {
       method:"get",
       params : params,
-      url: 'http://ahci.ddns.net:8080/course/courses'
+      url: '/course/courses'
     }
     axios(config)
     .then((res)=>{addSearchedCoursesInfo(res.data)})

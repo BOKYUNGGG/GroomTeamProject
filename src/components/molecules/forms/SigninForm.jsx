@@ -86,7 +86,7 @@ const SigninForm = () => {
     console.log(data)
     var config = {
       method: 'post',
-      url: 'http://ahci.ddns.net:8080/student',
+      url: '/student',
       headers: { 
         'Content-Type': 'application/json'
       },

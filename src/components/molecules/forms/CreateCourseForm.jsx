@@ -98,7 +98,7 @@ const CreateCourseForm = ({data}) => {
     
       var config = {
         method: 'post',
-        url: 'http://ahci.ddns.net:8080/course',
+        url: '/course',
         headers: { 
           'Content-Type': 'application/json'
         },

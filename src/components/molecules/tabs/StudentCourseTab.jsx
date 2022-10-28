@@ -44,7 +44,7 @@ const StudentCourseTab = () => {
       year : parseInt(e.target.year.value)
     }
   
-    axios.get("http://ahci.ddns.net:8080/enrolment", {
+    axios.get("/enrolment", {
       params : data
     })
     .then((res)=>{dispatchedAdd(res.data.courses)})
@@ -58,7 +58,7 @@ const StudentCourseTab = () => {
     dispatchedDelete()
     
 
-    axios.get("http://ahci.ddns.net:8080/enrolment", {
+    axios.get("/enrolment", {
       params : {
         semester : "SPRING",
         studentId : profileInfo.studentId,

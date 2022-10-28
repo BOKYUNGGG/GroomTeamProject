@@ -77,7 +77,7 @@ const PutEnrollmentTable = ({ data, columns}) => {
     
     var config = {
       method: 'put',
-      url: 'http://ahci.ddns.net:8080/enrolment',
+      url: '/enrolment',
       headers: { 
         'Content-Type': 'application/json'
       },
