@@ -16,7 +16,7 @@ spec:
         paths:
           - backend:
               service:
-                name: aaaaaaaaa
+                name: enrolment-react-svc
                 port:
                   number: 80
             path: /
