@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: enrolment-react
-  namespace: enrolment-react
+  namespace: react
 spec:
   replicas: 2
   selector:
@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: enrolment-react-svc
-  namespace: enrolment-react
+  namespace: react
 spec:
   type : ClusterIP
   selector:
