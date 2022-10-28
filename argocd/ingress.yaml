@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/instance: enrolment-svc
     env: dev
   name: fe
-  namespace: enrolment-fe
+  namespace: enrolment-react
 spec:
   ingressClassName: alb
   rules:
