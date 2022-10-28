@@ -4,9 +4,6 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-  labels:
-    app.kubernetes.io/instance: enrolment-svc
-    env: dev
   name: fe
   namespace: enrolment-react
 spec:
