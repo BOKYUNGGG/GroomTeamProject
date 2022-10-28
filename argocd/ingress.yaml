@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+  labels:
+    app.kubernetes.io/instance: enrolment-svc
+    env: dev
+  name: fe
+  namespace: enrolment-fe
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: aaaaaaaaa
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+          
