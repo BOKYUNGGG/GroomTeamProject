@@ -1,1 +1,39 @@
-asd
+pipeline{
+    agent{
+        kubernetes {
+            yaml'''
+            
+            apiVersion: v1
+            kind: Pod
+            metadata:
+            name: kaniko
+            spec:
+            containers:
+            - name: kaniko
+                image: gcr.io/kaniko-project/executor:latest
+                args:  
+                volumeMounts:
+                - name: aws-cred
+                    mountPath: /kaniko/.docker
+            volumes:
+                - name: aws-cred
+                  secret:
+                    secretName: aws-cred
+                    items:
+                    - key: .dockerconfigjson
+                        path: config.json
+            '''
+        }
+    }
+    stage('Build and Push'){
+        steps{
+            container('kaniko'){
+                sh 'executor \
+                --context https://github.com/BOKYUNGGG/GroomTeamProject.git \
+                --dockerfile Dockerfile \
+                --destination 457665080883.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend
+                '
+            }
+        }
+    }
+}
