@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+name: kaniko
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    command :
+    - /busybox/cat
+    tty : true
+    volumeMounts:
+    - name: aws-cred
+      mountPath: /kaniko/.docker
+  volumes:
+  - name: aws-cred
+    secret:
+      secretName: aws-cred
+      items:
+      - key: .dockerconfigjson
+        path: config.json
