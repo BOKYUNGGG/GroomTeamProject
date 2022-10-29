@@ -1,25 +1,21 @@
-# nginx 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용합니다.
-FROM nginx:latest
-LABEL Author="joozero@amazon.com"
-
-# root에 app 폴더 생성 및 work dir 고정
-RUN mkdir /app
+FROM node:16-alpine as builder
+# Set the working directory to /app inside the container
 WORKDIR /app
+# Copy app files
+COPY . .
+# Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
+RUN npm ci 
+# Build the app
+RUN npm run build
 
-# work dir에 build 폴더 생성 /app/build
-RUN mkdir ./build
-
-# host pc의 현재경로의 build 폴더를 workdir 의 build 폴더로 복사
-ADD ./build ./build
-
-# nginx 의 default.conf 를 삭제
-RUN rm /etc/nginx/conf.d/default.conf
-
-# host pc 의 nginx.conf 를 아래 경로에 복사
-COPY ./nginx.conf /etc/nginx/conf.d
-
-# 80 포트 오픈
+# Bundle static assets with nginx
+FROM nginx:1.21.0-alpine as production
+ENV NODE_ENV production
+# Copy built assets from `builder` image
+COPY --from=builder /app/build /usr/share/nginx/html
+# Add your nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Expose port
 EXPOSE 80
-
-# container 실행 시 자동으로 실행할 command. nginx 시작함
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
