@@ -1,20 +1,21 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: "frontend-ingress"
+  namespace: default
   annotations:
+    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-  name: enrolment-ingress
 spec:
-  ingressClassName: alb
   rules:
     - http:
         paths:
-          - backend:
+          - path: /
+            pathType: Prefix
+            backend:
               service:
-                name: enrolment-react-svc
+                name: "frontend-app"
                 port:
                   number: 80
-            path: /
-            pathType: Prefix
-          
