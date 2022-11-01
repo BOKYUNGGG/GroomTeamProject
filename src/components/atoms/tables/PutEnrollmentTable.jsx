@@ -111,11 +111,6 @@ const PutEnrollmentTable = ({ data, columns}) => {
                   <input name="submit" type="submit" value="submit"></input>
                 </form>
               </Submit>
-              <Delete>
-                <form onSubmit={(e)=>{onDeleteReserved(e,row)}}>
-                  <input name="submit" type="submit" value="delete"></input>
-                </form>
-              </Delete>
             </div>
           ),
         },
