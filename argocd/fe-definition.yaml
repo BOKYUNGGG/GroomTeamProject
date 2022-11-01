@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend-app
-          image: 457665080883.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend:latest
+          image: 457665080883.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend:stable
           imagePullPolicy: Always
           ports:
             - containerPort: 80
