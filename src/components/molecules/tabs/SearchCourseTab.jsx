@@ -65,9 +65,7 @@ const SearchCourseTab = () => {
     }
     axios(config)
     .then((res)=>{addSearchedCoursesInfo(res.data)})
-    .catch((e)=>{
-      console.log(e)
-      alert(e)})
+    .catch((e)=>{alert(e)})
   }
   
   return (

@@ -10,7 +10,6 @@ const Wrapper = styled.div`
 
 `
 const TableSearchForm = ({onSubmit}) => {
-
     const handleSubmit = (event) => {
         event.preventDefault();
         onSubmit(event.target.elements.filter.value)

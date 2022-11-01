@@ -1,6 +1,8 @@
 import React from 'react'
 import { useGlobalFilter, useSortBy, useTable, usePagination, useRowSelect } from 'react-table'
 import TableSearchForm from '../../molecules/forms/TableSearchForm'
+import RightArrow from '../svgs/RightArrow'
+import LeftArrow from '../svgs/LeftArrow'
 import styled from 'styled-components'
 const Styles = styled.div`
   width : 100%;
@@ -165,17 +167,9 @@ function SearchCourseTable({addReserved, columns, data }) {
       */}
       <PagenationWrapper>
         <button onClick={()=>{selectedFlatRows.map((element)=>addReserved(element.original))}}>관심과목 담기</button>
-        <svg 
-          onClick={() => previousPage()} disabled={!canPreviousPage}
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--indigo-bluh)" viewBox="0 0 16 16">
-          <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
-        </svg>
+        <LeftArrow onClick={() => previousPage()} disabled={!canPreviousPage}/>
         <span>Page{' '}{pageIndex + 1} of {pageOptions.length}</span>
-        <svg 
-          onClick={() => nextPage()} disabled={!canNextPage}
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--indigo-bluh)" viewBox="0 0 16 16">
-          <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-        </svg>
+        <RightArrow onClick={() => previousPage()} disabled={!canNextPage}/>
       </PagenationWrapper>
     </Styles>
   )

@@ -10,8 +10,7 @@ const initialState = [
     {
         selected : true,
         className : "selected",
-        menu : "강의검색",
-        color : "indigo"
+        menu : "강의검색"
     }
 ]
 export default function tabReducer(state=initialState, action){
@@ -25,17 +24,23 @@ export default function tabReducer(state=initialState, action){
                 menu : action.data.menu,
                 className : "non-selected",
             })
+
         case TOGGLE :
-            const toggledState = state.map(element => element.selected ? {...element, className : "non-selected", selected : false} : element) 
+            const toggledState = state.map(element => element.selected ? 
+                {...element, className : "non-selected", selected : false} : element) 
             return toggledState.map(element => element.menu === action.data ? {...element, className : "selected", selected :true} : element)
+
         case DELETE : 
-            if (state.length === 1) return state
+            if (state.length === 1) {
+                return state
+            }
             else {
                 const deletedState = state.filter(element => element.menu !== action.data)    
                 deletedState[0].selected = true
                 deletedState[0].className = "selected"
                 return deletedState
             }
+            
         default : 
             return state
     }

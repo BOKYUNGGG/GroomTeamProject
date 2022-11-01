@@ -11,8 +11,6 @@ const StyledForm = styled.form`
     flex-direction : column;
     justify-content : center;
     align-items : center;
-
-    // inputs styling
     & input {
       padding-left : 10px;
       width : 200px;
@@ -39,7 +37,6 @@ const StyledForm = styled.form`
       border-radius : 2px;
       border : solid 2px var(--smoke);
     }
-    // select styling
     & select {
       width : 200px;
       height : 40px;
@@ -63,16 +60,13 @@ const StyledForm = styled.form`
     }
 `
 const SigninForm = () => {
-  // redux action function
+  
   const dispatch = useDispatch()
   const dispatchedUpdateProfileInfo = data => dispatch(updateProfileInfo(data))
-  // navigator
   const navigate = useNavigate()
-  // onSubmit handler
-  const handleOnSubmit = (e) =>{
-    // onSubmit 시에 React App 이 재실행되는 것을 막아줌 
-    e.preventDefault() 
 
+  const handleOnSubmit = (e) =>{
+    e.preventDefault() 
     var data = JSON.stringify({
       studentId : parseInt(e.target.studentId.value),
       email : e.target.email.value,
@@ -80,26 +74,21 @@ const SigninForm = () => {
       department : e.target.department.value,
       name : e.target.name.value,
     })
-    console.log(data)
+    
     var config = {
       method: 'post',
       url: '/student',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
+      headers: {'Content-Type': 'application/json'},
       data : data
     }
+
     axios(config)
-    .then((res)=>{
-      console.log(res)
-      dispatchedUpdateProfileInfo(res.data)}) 
+    .then((res)=>{dispatchedUpdateProfileInfo(res.data)}) 
     .then(()=>{alert(`${e.target.name.value}님 만나서 반갑습니다!`)})       
     .then(()=>{navigate('/main')})
-    .catch((e)=>{
-      console.log(e)
-      alert(e)});
+    .catch((e)=>{alert(e)});
   }
-  // Reder
+
   return (
     <StyledForm onSubmit={(e)=>{handleOnSubmit(e)}}>
         <input name="studentId" type="text" placeholder="studentId"/>
@@ -116,5 +105,4 @@ const SigninForm = () => {
     </StyledForm>
   )
 }
-
 export default SigninForm

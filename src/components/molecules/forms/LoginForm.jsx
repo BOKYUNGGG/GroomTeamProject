@@ -49,34 +49,21 @@ const StyledForm = styled.form`
       background-color : var(--indigo);
     }
 `
-
 const LoginForm = () => {
-  // redux action function
   const dispatch = useDispatch()
   const dispatchedUpdateProfileInfo = data => dispatch(updateProfileInfo(data))
-
-  // navigator
   const navigate = useNavigate()
 
 
-  // onSubmit handler
   const onSubmit = (e) =>{
-    // onSubmit 시에 React App 이 재실행되는 것을 막아줌 
     e.preventDefault() 
-
-    // REST API Request
     axios.get(`/student/${e.target.studentId.value}`)
     .then((res)=>{
-      console.log(res)
       dispatchedUpdateProfileInfo(res.data)
       alert(`${res.data.name}님 어서오세요!`)
     })    
     .then(()=>navigate('/main'))
-    .catch((e)=>{
-      console.log(e)
-      alert(e)})
-
-
+    .catch((e)=>{alert(e)})
     
   }
   return (
@@ -87,5 +74,4 @@ const LoginForm = () => {
     </StyledForm>
   )
 }
-
 export default LoginForm
