@@ -1,4 +1,3 @@
-
 export const courseColumns = [
   {
     Header: '학수번호',

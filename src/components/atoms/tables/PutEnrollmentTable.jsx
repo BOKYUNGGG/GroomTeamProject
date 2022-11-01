@@ -85,11 +85,7 @@ const PutEnrollmentTable = ({ data, columns}) => {
     }
     axios(config)
     .then(()=>{e.target.submit.style = "color : white; background-color : var(--mint);"}) 
-    .catch((error)=>{
-      console.log(error)
-      alert(error)
-      e.target.submit.style = "color : white; background-color : var(--red);"}
-      );
+    .catch(()=>{e.target.submit.style = "color : white; background-color : var(--red);"})
   }
   // 관심과목 삭제
   const onDeleteReserved = (e, row) =>{
@@ -111,11 +107,6 @@ const PutEnrollmentTable = ({ data, columns}) => {
                   <input name="submit" type="submit" value="submit"></input>
                 </form>
               </Submit>
-              <Delete>
-                <form onSubmit={(e)=>{onDeleteReserved(e,row)}}>
-                  <input name="submit" type="submit" value="delete"></input>
-                </form>
-              </Delete>
             </div>
           ),
         },

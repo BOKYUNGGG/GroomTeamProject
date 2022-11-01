@@ -1,9 +1,13 @@
+// action type 정의
 const UPDATE = 'profile/UPDATE'
 const DELETE = 'profile/DLETE'
 
+// reducer 로직 명령을 수행시킬 함수
 export const updateProfileInfo = (data) => ({type : UPDATE, data})
 export const deleteProfileInfo = (    ) => ({type : DELETE      })
 
+
+// 초기 state 설정
 const initialState = null
 // {
 //   studentId :20142058,
@@ -13,6 +17,8 @@ const initialState = null
 //   department : 'ACCOUNTING',
 // } 
 
+
+// 업데이트 로직 정의
 export default function profileReducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE:
@@ -23,5 +29,4 @@ export default function profileReducer(state = initialState, action) {
         default:
           return state;
       }
-
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
-import axios from 'axios'
 import { departmentList } from '../../../assets/courseData'
 import {updateProfileInfo} from '../../../modules/profile'
 import {useDispatch} from 'react-redux'
+import styled from 'styled-components'
+import axios from 'axios'
 const StyledForm = styled.form`
     display : flex;
     gap : 2px;
@@ -62,15 +62,12 @@ const StyledForm = styled.form`
       background-color : var(--indigo);
     }
 `
-
 const SigninForm = () => {
   // redux action function
   const dispatch = useDispatch()
   const dispatchedUpdateProfileInfo = data => dispatch(updateProfileInfo(data))
-
   // navigator
   const navigate = useNavigate()
-
   // onSubmit handler
   const handleOnSubmit = (e) =>{
     // onSubmit 시에 React App 이 재실행되는 것을 막아줌 
@@ -102,8 +99,7 @@ const SigninForm = () => {
       console.log(e)
       alert(e)});
   }
-  // 
-
+  // Reder
   return (
     <StyledForm onSubmit={(e)=>{handleOnSubmit(e)}}>
         <input name="studentId" type="text" placeholder="studentId"/>
