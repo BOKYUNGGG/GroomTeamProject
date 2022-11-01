@@ -10,7 +10,7 @@ pipeline{
                 container('kaniko'){
                     sh '''
                     /kaniko/executor --context `pwd` \
-                    --destination=457665080883.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend:latest \
+                    --destination=457665080883.dkr.ecr.ap-northeast-2.amazonaws.com/react-frontend \
                     --dockerfile `pwd`/Dockerfile 
                     '''
                 }
